@@ -1,0 +1,22 @@
+- name: Setup portainer
+  hosts: portainer
+  become: true
+  
+  tasks:
+    - name: create {{portainer_data_dir}}
+      file:
+        path: "{{portainer_data_dir}}"
+        state: directory
+        mode: '0755'
+
+    - name: start portainer container
+      docker_container:
+        name: portainer
+        image: portainer/portainer:{{portainer_version}}
+        state: started
+        ports:
+        - "{{portainer_port}}:9000"
+        restart_policy: always
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - "{{portainer_data_dir}}:/data"

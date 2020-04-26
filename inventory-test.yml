@@ -9,3 +9,6 @@ all:
     portainer:
       hosts:
         srv-test:
+    nexus:
+      hosts:
+        srv-test:

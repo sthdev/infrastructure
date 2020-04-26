@@ -1,0 +1,23 @@
+- name: Setup Sonatype Nexus
+  hosts: nexus
+  become: true
+  
+  tasks:
+    - name: create {{nexus_data_dir}}
+      file:
+        path: "{{nexus_data_dir}}"
+        state: directory
+        mode: '0755'
+        # The Nexus process runs with UID 200.
+        owner: 200
+
+    - name: start nexus container
+      docker_container:
+        name: nexus
+        image: sonatype/nexus3:{{nexus_version}}
+        state: started
+        ports:
+        - "{{nexus_port}}:8081"
+        restart_policy: always
+        volumes:
+        - "{{nexus_data_dir}}:/nexus-data"

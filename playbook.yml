@@ -16,4 +16,5 @@
       pip_package: python3-pip
       pip_executable: pip3
 
-- include: playbook-portainer.yml
+- import_playbook: playbook-portainer.yml
+- import_playbook: playbook-nexus.yml

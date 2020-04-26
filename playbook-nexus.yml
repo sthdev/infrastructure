@@ -9,7 +9,7 @@
         state: directory
         mode: '0755'
         # The Nexus process runs with UID 200.
-        owner: 200
+        owner: "200"
 
     - name: start nexus container
       docker_container:

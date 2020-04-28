@@ -21,6 +21,6 @@
         - "{{gitlab_ssh_port}}:22"
         restart_policy: always
         volumes:
-        - "{{gitlab_data_dir}}/config:/etc/gitlab"
-        - "{{gitlab_data_dir}}/logs:/var/log/gitlab"
-        - "{{gitlab_data_dir}}/data:/var/opt/gitlab"
+        - "{{gitlab_config_dir}}:/etc/gitlab"
+        - "{{gitlab_data_dir}}:/var/opt/gitlab"
+        - "{{gitlab_log_dir}}:/var/log/gitlab"

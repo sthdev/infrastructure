@@ -19,6 +19,12 @@
         group: "1000"
       with_items:
         - "{{elasticsearch_data_dir}}"
+        - "{{kibana_data_dir}}"
+
+    - name: create elastic_network network
+      docker_network:
+        name: "elastic_network"
+        internal: no
 
     - name: start elasticsearch container
       docker_container:
@@ -31,9 +37,12 @@
           discovery.type: single-node
           "bootstrap.memory_lock": "true"
           ES_JAVA_OPTS: "-Xms{{elasticsearch_heap_size}} -Xmx{{elasticsearch_heap_size}}"
+        networks:
+          - name: "elastic_network"
+        networks_cli_compatible: yes
         ports:
-        - "{{elasticsearch_rest_port}}:9200"
-        - "{{elasticsearch_nodes_port}}:9300"
+          - "{{elasticsearch_rest_port}}:9200"
+          - "{{elasticsearch_nodes_port}}:9300"
         restart_policy: always
         volumes:
           - "{{elasticsearch_data_dir}}:/data"
@@ -41,3 +50,21 @@
           - nofile:65535:65535
           - memlock:-1:-1
 
+    - name: start kibana container
+      docker_container:
+        name: kibana
+        hostname: kibana
+        image: docker.elastic.co/kibana/kibana:{{kibana_version}}
+        state: started
+        env:
+          ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+          SERVER_NAME: kibana
+          SERVER_HOST: 0.0.0.0
+        networks:
+          - name: "elastic_network"
+        networks_cli_compatible: yes
+        ports:
+          - "{{kibana_port}}:5601"
+        restart_policy: always
+        volumes:
+          - "{{kibana_data_dir}}:/usr/share/kibana/data"

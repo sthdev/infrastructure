@@ -13,7 +13,6 @@
         - "{{gitlab_data_dir}}"
         - "{{gitlab_log_dir}}"
 
-
     - name: start gitlab container
       docker_container:
         name: gitlab

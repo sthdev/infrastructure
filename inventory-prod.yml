@@ -6,6 +6,9 @@ all:
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
   children:
+    elastic:
+      hosts:
+        srv1:
     gitlab:
       hosts:
         srv1:

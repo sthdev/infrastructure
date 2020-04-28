@@ -1,0 +1,26 @@
+- name: Setup GitLab
+  hosts: gitlab
+  become: true
+  
+  tasks:
+    - name: create {{gitlab_data_dir}}
+      file:
+        path: "{{gitlab_data_dir}}"
+        state: directory
+        mode: '0755'
+
+    - name: start gitlab container
+      docker_container:
+        name: gitlab
+        image: gitlab/gitlab-ce:{{gitlab_version}}
+        pull: true
+        state: started
+        ports:
+        - "{{gitlab_http_port}}:80"
+        - "{{gitlab_https_port}}:443"
+        - "{{gitlab_ssh_port}}:22"
+        restart_policy: always
+        volumes:
+        - "{{gitlab_data_dir}}/config:/etc/gitlab"
+        - "{{gitlab_data_dir}}/logs:/var/log/gitlab"
+        - "{{gitlab_data_dir}}/data:/var/opt/gitlab"

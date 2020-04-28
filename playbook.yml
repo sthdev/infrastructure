@@ -15,4 +15,5 @@
       pip_executable: pip3
 
 - import_playbook: playbook-portainer.yml
+- import_playbook: playbook-gitlab.yml
 - import_playbook: playbook-nexus.yml

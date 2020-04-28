@@ -6,9 +6,12 @@ all:
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
   children:
-    portainer:
+    gitlab:
       hosts:
         srv1:
     nexus:
+      hosts:
+        srv1:
+    portainer:
       hosts:
         srv1:

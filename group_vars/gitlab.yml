@@ -1,0 +1,6 @@
+---
+gitlab_data_dir: /var/gitlab/data
+gitlab_version: 12.10.1-ce.0
+gitlab_http_port: 8080
+gitlab_https_port: 8443
+gitlab_ssh_port: 8022

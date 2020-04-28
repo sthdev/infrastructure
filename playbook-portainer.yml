@@ -13,6 +13,7 @@
       docker_container:
         name: portainer
         image: portainer/portainer:{{portainer_version}}
+        pull: true
         state: started
         ports:
         - "{{portainer_port}}:9000"

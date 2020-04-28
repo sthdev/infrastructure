@@ -15,6 +15,7 @@
       docker_container:
         name: nexus
         image: sonatype/nexus3:{{nexus_version}}
+        pull: true
         state: started
         ports:
         - "{{nexus_port}}:8081"

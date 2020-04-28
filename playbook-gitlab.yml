@@ -3,11 +3,16 @@
   become: true
   
   tasks:
-    - name: create {{gitlab_data_dir}}
+    - name: create {{item}}
       file:
-        path: "{{gitlab_data_dir}}"
+        path: "{{item}}"
         state: directory
         mode: '0755'
+      with_items:
+        - "{{gitlab_config_dir}}"
+        - "{{gitlab_data_dir}}"
+        - "{{gitlab_log_dir}}"
+
 
     - name: start gitlab container
       docker_container:

@@ -68,3 +68,4 @@
         restart_policy: always
         volumes:
           - "{{kibana_data_dir}}:/usr/share/kibana/data"
+          

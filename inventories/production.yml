@@ -12,6 +12,9 @@ all:
     gitlab:
       hosts:
         srv1:
+    metricbeat:
+      hosts:
+        srv1:
     nexus:
       hosts:
         srv1:

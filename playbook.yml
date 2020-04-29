@@ -18,3 +18,4 @@
 - import_playbook: playbook-elastic.yml
 - import_playbook: playbook-gitlab.yml
 - import_playbook: playbook-nexus.yml
+- import_playbook: playbook-metricbeat.yml

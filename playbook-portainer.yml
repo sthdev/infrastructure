@@ -2,12 +2,13 @@
   hosts: portainer
   become: true
   
+  vars_files:
+    - vars/credentials.yml
+
   tasks:
-    - name: create {{portainer_data_dir}}
-      file:
-        path: "{{portainer_data_dir}}"
-        state: directory
-        mode: '0755'
+    - name: create portainer data volume
+      docker_volume:
+        name: "{{portainer_data_volume_name}}"
 
     - name: start portainer container
       docker_container:
@@ -16,8 +17,10 @@
         pull: true
         state: started
         ports:
-        - "{{portainer_port}}:9000"
+          - "{{portainer_port}}:9000"
         restart_policy: always
         volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - "{{portainer_data_dir}}:/data"
+          - /var/run/docker.sock:/var/run/docker.sock
+          - "{{portainer_data_volume_name}}:/data" 
+        # requires passlib and bcrypt python modules to be installed on the ansible host
+        command: "--admin-password='{{ portainer_admin_password | password_hash('bcrypt') }}'"

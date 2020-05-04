@@ -1,23 +1,11 @@
 ---
 all:
   hosts:
-    srv-test:
-      ansible_user: stephan
+    srv1-test:
+      ansible_user: master
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
   children:
-    elastic:
+    virtualbox:
       hosts:
-        srv-test:
-    gitlab:
-      hosts:
-        srv-test:
-    metricbeat:
-      hosts:
-        srv-test:
-    nexus:
-      hosts:
-        srv-test:
-    portainer:
-      hosts:
-        srv-test:
+        srv1-test:

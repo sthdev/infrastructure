@@ -1,21 +1,30 @@
 ---
-- name: Setup Docker and service user
-  hosts: all
+- name: Setup VirtualBox
+  hosts: virtualbox
   become: true
   
+  vars_files:
+    - vars/credentials.yml
+
   roles:
-    - role: geerlingguy.docker
-      docker_compose_version: "1.25.5"
-      docker_compose_path: /usr/bin/docker-compose
+    - role: virtualbox
+      virtualbox_user: virtualbox
+      virtualbox_user_pw: "{{virtualbox_password}}" 
+      virtualbox_host: 0.0.0.0
+      virtualbox_port: 18083
 
-    - role: geerlingguy.pip
-      pip_install_packages:
-        - docker
-      pip_package: python3-pip
-      pip_executable: pip3
+#     - role: geerlingguy.docker
+#       docker_compose_version: "1.25.5"
+#       docker_compose_path: /usr/bin/docker-compose
 
-- import_playbook: playbook-portainer.yml
-- import_playbook: playbook-elastic.yml
-- import_playbook: playbook-gitlab.yml
-- import_playbook: playbook-nexus.yml
-- import_playbook: playbook-metricbeat.yml
+#     - role: geerlingguy.pip
+#       pip_install_packages:
+#         - docker
+#       pip_package: python3-pip
+#       pip_executable: pip3
+
+# - import_playbook: playbook-portainer.yml
+# - import_playbook: playbook-elastic.yml
+# - import_playbook: playbook-gitlab.yml
+# - import_playbook: playbook-nexus.yml
+# - import_playbook: playbook-metricbeat.yml

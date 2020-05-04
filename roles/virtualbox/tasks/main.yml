@@ -55,14 +55,6 @@
     update_password: on_create # only touch PW on user creation
     password: "{{ virtualbox_user_pw|password_hash('sha512') }}"
 
-- name: Create a folder for ISO files to be shared with phpVirtualBox
-  file:
-    path: /home/{{ virtualbox_user }}/isos
-    owner: "{{ virtualbox_user }}"
-    group: vboxusers
-    mode: 0770
-    state: directory
-
 - name: Configure vboxweb deamon user
   template:
     src: virtualbox.j2

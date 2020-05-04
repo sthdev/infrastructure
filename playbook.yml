@@ -1,4 +1,19 @@
 ---
+- name: Setup Docker
+  hosts: all
+  become: true
+
+  roles:
+    - role: geerlingguy.docker
+      docker_compose_version: "1.25.5"
+      docker_compose_path: /usr/bin/docker-compose
+
+    - role: geerlingguy.pip
+      pip_install_packages:
+        - docker
+      pip_package: python3-pip
+      pip_executable: pip3
+
 - name: Setup VirtualBox
   hosts: virtualbox
   become: true
@@ -8,23 +23,14 @@
 
   roles:
     - role: virtualbox
-      virtualbox_user: virtualbox
+      virtualbox_user: "{{vbox_user}}"
       virtualbox_user_pw: "{{virtualbox_password}}" 
       virtualbox_host: 0.0.0.0
-      virtualbox_port: 18083
+      virtualbox_port: "{{vbox_port}}"
 
-#     - role: geerlingguy.docker
-#       docker_compose_version: "1.25.5"
-#       docker_compose_path: /usr/bin/docker-compose
-
-#     - role: geerlingguy.pip
-#       pip_install_packages:
-#         - docker
-#       pip_package: python3-pip
-#       pip_executable: pip3
-
-# - import_playbook: playbook-portainer.yml
-# - import_playbook: playbook-elastic.yml
-# - import_playbook: playbook-gitlab.yml
-# - import_playbook: playbook-nexus.yml
-# - import_playbook: playbook-metricbeat.yml
+    - role: phpvirtualbox
+      virtualbox_host: "{{groups['virtualbox'][0]}}:{{vbox_port}}"
+      virtualbox_servername: "{{virtualbox_host}}"
+      virtualbox_user: "{{vbox_user}}"
+      virtualbox_user_password: "{{virtualbox_password}}"
+      php_virtualbox_port: "{{php_vbox_port}}"

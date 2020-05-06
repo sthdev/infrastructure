@@ -1,0 +1,10 @@
+---
+portainer_host: portainer
+portainer_port: 9000
+portainer_data_volume_name: portainer_data
+portainer_version: latest
+
+portainer_ldap_url: ""
+portainer_ldap_base_dn: ""
+
+portainer_admin_password: changeme

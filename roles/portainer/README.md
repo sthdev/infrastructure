@@ -1,0 +1,1 @@
+Installs Portainer in a Docker container.

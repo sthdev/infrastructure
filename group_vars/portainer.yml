@@ -1,5 +1,3 @@
 ---
-portainer_data_dir: /var/portainer/data
 portainer_version: 1.23.2
-portainer_port: 9000
-portainer_data_volume_name: portainer_data
+portainer_port: 8081

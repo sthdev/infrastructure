@@ -34,3 +34,5 @@
       virtualbox_user: "{{vbox_user}}"
       virtualbox_user_password: "{{virtualbox_password}}"
       php_virtualbox_port: "{{php_vbox_port}}"
+
+- import_playbook: playbook-portainer.yml

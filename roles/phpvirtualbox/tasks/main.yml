@@ -14,3 +14,4 @@
       CONF_browserRestrictFolders: "/home"
     ports:
       "{{php_virtualbox_port}}:80"
+    restart_policy: always

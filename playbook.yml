@@ -36,3 +36,5 @@
       php_virtualbox_port: "{{php_vbox_port}}"
 
 - import_playbook: playbook-portainer.yml
+- import_playbook: playbook-elastic.yml
+- import_playbook: playbook-metricbeat.yml

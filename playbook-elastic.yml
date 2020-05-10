@@ -2,70 +2,10 @@
   hosts: elastic
   become: true
   
-  tasks:
-    # https://github.com/elastic/elasticsearch-docker/blob/7c1dc434d32b88b414180cbddc9412acb41cb14c/README.md
-    - name: set vm.max_map_count to 262144 in sysctl
-      sysctl: name={{ item.key }} value={{ item.value }}
-      with_items:
-        - { key: "vm.max_map_count", value: "262144" }
-
-    - name: create {{item}}
-      file:
-        path: "{{item}}"
-        state: directory
-        mode: '0755'
-        # Elastic Search runs with UID 1000:1000.
-        owner: "1000"
-        group: "1000"
-      with_items:
-        - "{{elasticsearch_data_dir}}"
-        - "{{kibana_data_dir}}"
-
-    - name: create elastic_network network
-      docker_network:
-        name: "elastic_network"
-        internal: no
-
-    - name: start elasticsearch container
-      docker_container:
-        name: elasticsearch
-        image: docker.elastic.co/elasticsearch/elasticsearch:{{elasticsearch_version}}
-        pull: true
-        state: started
-        env:
-          node.name: elasticsearch
-          discovery.type: single-node
-          "bootstrap.memory_lock": "true"
-          ES_JAVA_OPTS: "-Xms{{elasticsearch_heap_size}} -Xmx{{elasticsearch_heap_size}}"
-        networks:
-          - name: "elastic_network"
-        networks_cli_compatible: yes
-        ports:
-          - "{{elasticsearch_rest_port}}:9200"
-          - "{{elasticsearch_nodes_port}}:9300"
-        restart_policy: always
-        volumes:
-          - "{{elasticsearch_data_dir}}:/data"
-        ulimits:
-          - nofile:65535:65535
-          - memlock:-1:-1
-
-    - name: start kibana container
-      docker_container:
-        name: kibana
-        hostname: kibana
-        image: docker.elastic.co/kibana/kibana:{{kibana_version}}
-        state: started
-        env:
-          ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
-          SERVER_NAME: kibana
-          SERVER_HOST: 0.0.0.0
-        networks:
-          - name: "elastic_network"
-        networks_cli_compatible: yes
-        ports:
-          - "{{kibana_port}}:5601"
-        restart_policy: always
-        volumes:
-          - "{{kibana_data_dir}}:/usr/share/kibana/data"
-          
+  roles:
+    - role: elastic
+      elasticsearch_version: 7.6.2
+      elasticsearch_rest_port: 8082
+      elasticsearch_nodes_port: 8083
+      kibana_version: 7.6.2
+      kibana_port: 8084

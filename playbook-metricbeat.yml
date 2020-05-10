@@ -2,36 +2,10 @@
   hosts: metricbeat
   become: true
   
-  vars:
-    elasticsearch_host: "{{ groups['elastic'][0] }}"
-    elasticsearch_port: "{{ elasticsearch_rest_port}}"
-    kibana_host: "{{ groups['elastic'][0] }}"
-
-  tasks:
-    - name: create {{metricbeat_config_dir}}
-      file:
-        path: "{{metricbeat_config_dir}}"
-        state: directory
-        mode: '0755'
-
-    - name: Save metricbeat config file
-      template:
-        src: ../templates/metricbeat.yml.j2
-        dest: "{{metricbeat_config_dir}}/metricbeat.yml"
-        mode: '0644'
-
-    - name: start metricbeat container
-      docker_container:
-        name: metricbeat
-        image: docker.elastic.co/beats/metricbeat:{{metricbeat_version}}
-        pull: true
-        state: started
-        restart_policy: always
-        network_mode: host
-        volumes:
-          - "{{metricbeat_config_dir}}/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro"
-          - /var/run/docker.sock:/var/run/docker.sock:ro
-          - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-          - /proc:/hostfs/proc:ro
-          - /:/hostfs:ro
-        user: root
+  roles:
+    - role: metricbeat
+      metricbeat_version: 7.6.2
+      elasticsearch_host: "{{ groups['elastic'][0] }}"
+      elasticsearch_port: 8082
+      kibana_host: "{{ groups['elastic'][0] }}"
+      kibana_port: 8084

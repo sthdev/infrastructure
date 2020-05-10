@@ -1,4 +1,0 @@
----
-vbox_user: virtualbox
-vbox_port: 18083
-php_vbox_port: 8080

@@ -1,6 +1,9 @@
 - name: Setup elastic stack
   hosts: elastic
   become: true
+
+  vars_files:
+    - vars/credentials.yml
   
   roles:
     - role: elastic

@@ -9,6 +9,9 @@ all:
     portainer:
       hosts:
         srv1-test:
+    elastic:
+      hosts:
+        srv1-test:
     virtualbox:
       hosts:
         srv1-test:

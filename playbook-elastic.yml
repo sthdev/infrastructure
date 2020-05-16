@@ -1,0 +1,14 @@
+- name: Setup elastic stack
+  hosts: elastic
+  become: true
+
+  vars_files:
+    - vars/credentials.yml
+  
+  roles:
+    - role: elastic
+      elasticsearch_version: 7.7.0
+      elasticsearch_rest_port: 8082
+      elasticsearch_nodes_port: 8083
+      kibana_version: 7.7.0
+      kibana_port: 8084

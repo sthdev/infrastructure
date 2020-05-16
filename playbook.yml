@@ -14,5 +14,6 @@
       pip_package: python3-pip
       pip_executable: pip3
 
+- import_playbook: playbook-elastic.yml
 - import_playbook: playbook-portainer.yml
 - import_playbook: playbook-virtualbox.yml

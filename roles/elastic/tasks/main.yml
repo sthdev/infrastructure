@@ -24,12 +24,6 @@
     state: directory
     mode: '0755'
 
-- name: Save elasticsearch config file
-  template:
-    src: ../templates/elasticsearch.yml.j2
-    dest: "{{elasticsearch_config_dir}}/elasticsearch.yml"
-    mode: '0644'
-
 - name: start elasticsearch container
   docker_container:
     name: elasticsearch
@@ -50,7 +44,6 @@
     restart_policy: always
     volumes:
       - "{{elasticsearch_data_volume_name}}:/data"
-      - "{{elasticsearch_config_dir}}/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml:ro"
     ulimits:
       - nofile:65535:65535
       - memlock:-1:-1

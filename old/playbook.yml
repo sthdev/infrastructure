@@ -15,4 +15,6 @@
       pip_executable: pip3
 
 - import_playbook: playbook-portainer.yml
+- import_playbook: playbook-elastic.yml
+- import_playbook: playbook-metricbeat.yml
 - import_playbook: playbook-virtualbox.yml

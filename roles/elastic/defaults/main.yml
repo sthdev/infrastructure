@@ -9,3 +9,4 @@ elasticsearch_config_dir: /var/elasticsearch/config
 kibana_version: 7.6.2
 kibana_port: 5601
 kibana_data_volume_name: kibana_data
+kibana_config_dir: /var/kibana/config

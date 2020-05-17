@@ -28,3 +28,10 @@
           [Service]
           ExecStart=
           ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+      notify: restart docker
+  
+  handlers:
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted

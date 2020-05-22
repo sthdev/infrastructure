@@ -43,21 +43,18 @@
       Authorization: "Bearer {{auth_response.json.jwt}}"
   register: endpoints
 
-- name: set up portainer to use Docker endpoints
+- name: set up portainer to use local Docker endpoint
   uri:
     url: "http://{{portainer_host}}:{{portainer_port}}/api/endpoints"
     method: POST
     headers:
       Authorization: "Bearer {{auth_response.json.jwt}}"
     body_format: form-urlencoded
-    body: 
-      Name: "{{item.name}}"
+    body:
+      Name: local
       EndpointType: 1
-      URL: "{{item.url}}"
     status_code: 200
   when: endpoints.json is not defined or (endpoints.json|length == 0)
-  loop: "{{portainer_endpoints}}"
-
 
 - name: get settings
   uri:

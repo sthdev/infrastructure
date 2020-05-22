@@ -10,14 +10,3 @@ portainer_ldap_reader_dn: ""
 portainer_ldap_password: ""
 
 portainer_admin_password: changeme
-
-portainer_endpoints: [
-    {
-        name: srv1,
-        url: tcp://srv1.fritz.box:2375
-    },
-    {
-        name: srv1-test,
-        url: tcp://srv1-test.fritz.box:2375
-    }
-]

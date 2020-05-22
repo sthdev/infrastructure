@@ -6,5 +6,7 @@ portainer_version: latest
 
 portainer_ldap_url: ""
 portainer_ldap_base_dn: ""
+portainer_ldap_reader_dn: ""
+portainer_ldap_password: ""
 
 portainer_admin_password: changeme

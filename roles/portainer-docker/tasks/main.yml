@@ -74,14 +74,15 @@
     body:
       AuthenticationMethod: 2
       LDAPSettings:
-        AnonymousMode: true
+        AnonymousMode: false
         AutoCreateUsers: true
-        ReaderDN: ""
+        ReaderDN: "{{portainer_ldap_reader_dn}}"
+        Password: "{{portainer_ldap_password}}"
         URL: "{{portainer_ldap_url}}"
         TLSConfig:
-          TLS: false
+          TLS: true
           TLSSkipVerify: true
-        StartTLS: true
+        StartTLS: false
         SearchSettings:
           - BaseDN: "{{portainer_ldap_base_dn}}"
             Filter: ""
@@ -91,6 +92,3 @@
             GroupFilter: ""
             GroupAttribute: "member"
   when: "portainer_ldap_base_dn is defined"
-
-- debug:
-    msg: "{{portainer_ldap_base_dn}}"

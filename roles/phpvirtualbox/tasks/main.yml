@@ -10,7 +10,6 @@
       VBOX_NAME: "{{virtualbox_servername}}"
       VBOX_USER: "{{virtualbox_user}}"
       VBOX_PW: "{{virtualbox_user_password}}"
-      # CONF_noAuth: "true"
       CONF_browserRestrictFolders: "/home"
     ports:
       "{{php_virtualbox_port}}:80"

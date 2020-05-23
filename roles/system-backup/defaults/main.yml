@@ -1,0 +1,7 @@
+---
+system_backup_dir: /usr/share/system-backup
+system_backup_stopped_services: []
+system_backup_mount_point: /mnt/backup
+system_backup_remote_target_dir: ""
+system_backup_cron_hour: 0
+system_backup_cron_min: 0

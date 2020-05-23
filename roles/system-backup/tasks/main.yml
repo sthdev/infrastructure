@@ -1,0 +1,27 @@
+---
+- name: Install nfs-common
+  package:
+    name: nfs-common
+
+- name: Create system-backup directory
+  file:
+    path: "{{system_backup_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: Save backup script
+  template:
+    src: ../templates/system-backup.sh.j2    
+    dest: "{{system_backup_dir}}/system-backup.sh"
+    mode: '0755'
+
+- name: Run backup now
+  shell: "{{system_backup_dir}}/system-backup.sh"
+
+- name: Set up cron job
+  cron:
+    name: "backup system"
+    minute: "{{system_backup_cron_min}}"
+    hour: "{{system_backup_cron_hour}}"
+    job: "{{system_backup_dir}}/system-backup.sh"
+    user: root

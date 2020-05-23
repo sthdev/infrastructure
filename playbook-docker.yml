@@ -36,3 +36,15 @@
       service:
         name: docker
         state: restarted
+
+
+# Setup system backup
+
+# mount NFS share
+# sudo mount ds.fritz.box:/volume2/backup /mnt/backup/
+
+# stop docker service
+
+# backup docker folder
+
+# start docker service

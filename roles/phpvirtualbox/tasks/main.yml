@@ -11,6 +11,12 @@
       VBOX_USER: "{{virtualbox_user}}"
       VBOX_PW: "{{virtualbox_user_password}}"
       CONF_browserRestrictFolders: "/home"
+      # This does not work. This string is not properly transformed to a map.
+      # CONF_authConfig: "'host'=>'ds.fritz.box','bind_dn'=>'uid=%s,cn=users,dc=stephan-hildebrandt,dc=eu'"
     ports:
       "{{php_virtualbox_port}}:80"
     restart_policy: always
+
+- name: Print note about authentication
+  debug:
+    msg: Default credentials are 'admin'/'admin'. Please change them via UI.

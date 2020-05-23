@@ -10,3 +10,7 @@
       portainer_version: 1.23.2
       portainer_host: "{{groups['portainer'][0]}}"
       portainer_port: 8081
+      portainer_ldap_url: "{{ldap_url}}"
+      portainer_ldap_base_dn: "{{ldap_base_dn}}"
+      portainer_ldap_reader_dn: "{{ldap_reader_dn}}"
+      portainer_ldap_password: "{{ldap_password}}"

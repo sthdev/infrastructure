@@ -9,6 +9,9 @@ all:
     portainer:
       hosts:
         srv1.fritz.box:
+    ttrss:
+      hosts:
+        srv1.fritz.box:        
     virtualbox:
       hosts:
         srv1.fritz.box:

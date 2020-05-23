@@ -12,6 +12,9 @@ all:
     elastic:
       hosts:
         srv1-test.fritz.box:
+    ttrss:
+      hosts:
+        srv1-test.fritz.box:
     virtualbox:
       hosts:
         srv1-test.fritz.box:

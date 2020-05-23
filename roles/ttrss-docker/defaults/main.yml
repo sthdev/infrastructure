@@ -1,0 +1,4 @@
+---
+ttrss_config_dir: "/usr/share/ttrss"
+ttrss_port: 8280
+ttrss_public_url: http://localhost:8280/tt-rss

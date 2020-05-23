@@ -1,0 +1,33 @@
+---
+- name: Checkout source code
+  git:
+    repo: https://git.tt-rss.org/fox/ttrss-docker-compose.git
+    dest: "{{ttrss_config_dir}}"
+
+- name: Create .env file
+  copy:
+    src: "{{ttrss_config_dir}}/.env-dist"
+    remote_src: true
+    dest: "{{ttrss_config_dir}}/.env"
+
+- name: Set HTTP_PORT
+  lineinfile:
+    path: "{{ttrss_config_dir}}/.env"
+    regexp: "^HTTP_PORT="
+    line: "HTTP_PORT={{ttrss_port}}"
+
+- name: Set SELF_URL_PATH
+  lineinfile:
+    path: "{{ttrss_config_dir}}/.env"
+    regexp: "^SELF_URL_PATH="
+    line: "SELF_URL_PATH={{ttrss_public_url}}"
+
+- name: Start ttrss
+  docker_compose:
+    project_src: "{{ttrss_config_dir}}"
+    build: true
+    pull: true
+
+- name: Authentication info
+  debug:
+    msg: Default credentials are 'admin'/'password'.

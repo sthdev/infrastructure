@@ -1,0 +1,13 @@
+---
+- name: Setup ttrss
+  hosts: ttrss
+  become: true
+
+  vars_files:
+    - vars/credentials.yml
+    
+  roles:
+    - role: ttrss-docker
+      ttrss_config_dir: "/usr/share/ttrss"
+      ttrss_port: 8082
+      ttrss_public_url: "{{ttrss_url}}"

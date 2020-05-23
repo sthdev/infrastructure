@@ -1,5 +1,0 @@
----
-- import_playbook: playbook-docker.yml
-- import_playbook: playbook-portainer.yml
-- import_playbook: playbook-virtualbox.yml
-- import_playbook: playbook-elastic.yml

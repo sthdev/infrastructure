@@ -15,9 +15,6 @@
     dest: "{{system_backup_dir}}/system-backup.sh"
     mode: '0755'
 
-- name: Run backup now
-  shell: "{{system_backup_dir}}/system-backup.sh"
-
 - name: Set up cron job
   cron:
     name: "backup system"

@@ -3,6 +3,7 @@
   git:
     repo: https://git.tt-rss.org/fox/ttrss-docker-compose.git
     dest: "{{ttrss_config_dir}}"
+    version: static-dockerhub
 
 - name: Create .env file
   copy:

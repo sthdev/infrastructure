@@ -1,4 +1,0 @@
----
-nexus_data_dir: /var/nexus/data
-nexus_port: 8081
-nexus_version: 3.22.1

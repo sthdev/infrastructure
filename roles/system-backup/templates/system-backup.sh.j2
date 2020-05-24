@@ -13,7 +13,7 @@ systemctl stop {{item}}
 
 {% for item in system_backup_dirs %}
 echo "Backing up {{item}}..."
-rsync -av --archive --relative {{item}} {{system_backup_mount_point}}
+rsync -az --archive --relative {{item}} {{system_backup_mount_point}}
 {% endfor %}
 
 {% for item in system_backup_stopped_services %}

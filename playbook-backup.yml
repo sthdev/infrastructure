@@ -11,15 +11,10 @@
       system_backup_dir: /usr/share/system-backup
       system_backup_stopped_services: 
         - docker.service
-        - vboxadd-service.service
-        - vboxautostart-service.service
-        - vboxdrv.service
-        - vboxadd.service
-        - vboxballoonctrl-service.service
-        - vboxweb-service.service
       system_backup_mount_point: /mnt/backup
       system_backup_remote_target_dir: "{{system_backup_remote_root_dir}}{{inventory_hostname_short}}"
       system_backup_dirs:
         - /var/lib/docker
+        - /home/virtualbox
       system_backup_cron_hour: 0
       system_backup_cron_min: 0

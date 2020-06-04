@@ -7,7 +7,7 @@
 
   roles:
     - role: portainer-docker
-      portainer_version: 1.23.2
+      portainer_version: 1.24.0
       portainer_host: "{{groups['portainer'][0]}}"
       portainer_port: 8081
       portainer_ldap_url: "{{ldap_url}}"

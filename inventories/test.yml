@@ -12,6 +12,12 @@ all:
     elastic:
       hosts:
         srv1-test.fritz.box:
+    prometheus:
+      hosts:
+        srv1-test.fritz.box:
+    node_exporter:
+      hosts:
+        srv1-test.fritz.box:
     ttrss:
       hosts:
         srv1-test.fritz.box:

@@ -1,0 +1,7 @@
+- name: Setup node_exporter
+  hosts: node_exporter
+  become: true
+  
+  roles:
+    - role: node_exporter
+      node_exporter_port: 9200

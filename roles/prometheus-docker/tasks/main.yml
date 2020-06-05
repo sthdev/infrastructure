@@ -1,0 +1,56 @@
+---
+- name: create {{prometheus_config_dir}}
+  file:
+    path: "{{prometheus_config_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: create prometheus config file
+  template:
+    src: templates/prometheus/prometheus.yml.j2
+    dest: "{{prometheus_config_dir}}/prometheus.yml"
+
+- name: create prometheus data volume
+  docker_volume:
+    name: "{{prometheus_data_volume_name}}"
+
+- name: start prometheus container
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:{{prometheus_version}}
+    pull: true
+    state: started
+    ports:
+      - "{{prometheus_port}}:9090"
+    restart_policy: always
+    volumes:
+      - "{{prometheus_data_volume_name}}:/prometheus"
+      - "{{prometheus_config_dir}}/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+
+- name: create grafana data volume
+  docker_volume:
+    name: "{{grafana_data_volume_name}}"
+
+- name: create {{grafana_config_dir}}
+  file:
+    path: "{{grafana_config_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: create grafana config file
+  template:
+    src: templates/grafana/grafana.ini.j2
+    dest: "{{grafana_config_dir}}/grafana.ini"
+
+- name: start grafana container
+  docker_container:
+    name: grafana
+    image: grafana/grafana:{{grafana_version}}
+    pull: true
+    state: started
+    ports:
+      - "{{grafana_port}}:3000"
+    restart_policy: always
+    volumes:
+      - "{{grafana_data_volume_name}}://var/lib/grafana grafana/grafana"
+      - "{{grafana_config_dir}}/grafana.ini:/etc/grafana/grafana.ini:ro"

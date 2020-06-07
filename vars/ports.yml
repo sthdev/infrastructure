@@ -1,0 +1,6 @@
+ports_phpvirtualbox: 8080
+ports_portainer: 8081
+ports_ttrss: 8082
+ports_elasticsearch_rest: 8083
+ports_elasticsearch_nodes: 8084
+ports_kibana: 8085

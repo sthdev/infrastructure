@@ -5,6 +5,7 @@
   
   vars_files:
     - vars/credentials.yml
+    - vars/ports.yml
 
   vars:
     vbox_user: virtualbox
@@ -22,4 +23,4 @@
       virtualbox_servername: "{{virtualbox_host}}"
       virtualbox_user: "{{vbox_user}}"
       virtualbox_user_password: "{{virtualbox_password}}"
-      php_virtualbox_port: 8080
+      php_virtualbox_port: "{{ports_phpvirtualbox}}"

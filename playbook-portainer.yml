@@ -4,12 +4,13 @@
   
   vars_files:
     - vars/credentials.yml
+    - vars/ports.yml
 
   roles:
     - role: portainer-docker
       portainer_version: 1.24.0
       portainer_host: "{{groups['portainer'][0]}}"
-      portainer_port: 8081
+      portainer_port: "{{ports_portainer}}"
       portainer_ldap_url: "{{ldap_url}}"
       portainer_ldap_base_dn: "{{ldap_base_dn}}"
       portainer_ldap_reader_dn: "{{ldap_reader_dn}}"

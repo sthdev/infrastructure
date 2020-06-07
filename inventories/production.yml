@@ -9,6 +9,12 @@ all:
     portainer:
       hosts:
         srv1.fritz.box:
+    elastic:
+      hosts:
+        srv1.fritz.box:
+    metricbeat:
+      hosts:
+        srv1.fritz.box:
     ttrss:
       hosts:
         srv1.fritz.box:        

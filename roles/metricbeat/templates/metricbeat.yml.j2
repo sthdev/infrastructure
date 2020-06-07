@@ -1,7 +1,9 @@
 setup.dashboards.enabled: true
 
-setup.kibana.host: "{{ kibana_host }}:{{ kibana_port }}"
+setup.kibana.host: "{{ metricbeat_kibana_host }}:{{ metricbeat_kibana_port }}"
 setup.kibana.protocol: "http"
+setup.kibana.username: "{{ metricbeat_kibana_username }}"
+setup.kibana.password: "{{ metricbeat_kibana_password }}"
 
 metricbeat.config:
   modules:
@@ -48,6 +50,6 @@ metricbeat.modules:
   processes: ['.*']
 
 output.elasticsearch:
-  hosts: '{{ elasticsearch_host }}:{{ elasticsearch_port }}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+  hosts: '{{ metricbeat_elasticsearch_host }}:{{ metricbeat_elasticsearch_port }}'
+  username: '{{ metricbeat_elasticsearch_username }}'
+  password: '{{ metricbeat_elasticsearch_password }}'

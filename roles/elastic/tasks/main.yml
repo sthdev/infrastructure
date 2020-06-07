@@ -34,13 +34,17 @@
   template:
     src: templates/elasticsearch/elasticsearch.yml.j2
     dest: "{{elasticsearch_config_dir}}/elasticsearch.yml"
-  notify: restart elasticsearch
 
 - name: create kibana config file
   template:
     src: templates/kibana/kibana.yml.j2
     dest: "{{kibana_config_dir}}/kibana.yml"
-  notify: restart kibana
+
+- name: stop elasticsearch container
+  docker_container:
+    name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:{{elasticsearch_version}}
+    state: stopped
 
 - name: start elasticsearch container
   docker_container:
@@ -50,9 +54,9 @@
     state: started
     env:
       node.name: elasticsearch
-      discovery.type: single-node
       "bootstrap.memory_lock": "true"
       ES_JAVA_OPTS: "-Xms{{elasticsearch_heap_size}} -Xmx{{elasticsearch_heap_size}}"
+      ELASTIC_PASSWORD: "{{elasticsearch_admin_password}}"
     networks:
       - name: "elastic_network"
     networks_cli_compatible: yes
@@ -66,6 +70,13 @@
     ulimits:
       - nofile:65535:65535
       - memlock:-1:-1
+
+- name: stop kibana container
+  docker_container:
+    name: kibana
+    hostname: kibana
+    image: docker.elastic.co/kibana/kibana:{{kibana_version}}
+    state: stopped
 
 - name: start kibana container
   docker_container:

@@ -1,0 +1,8 @@
+---
+gitlab_config_dir: /etc/gitlab
+gitlab_version: latest
+gitlab_data_volume_name: gitlab_data
+
+gitlab_http_port: 80
+gitlab_https_port: 443
+gitlab_ssh_port: 22

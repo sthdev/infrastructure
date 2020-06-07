@@ -12,6 +12,9 @@ all:
     elastic:
       hosts:
         srv1.fritz.box:
+    gitlab:
+      hosts:
+        srv1.fritz.box:
     metricbeat:
       hosts:
         srv1.fritz.box:

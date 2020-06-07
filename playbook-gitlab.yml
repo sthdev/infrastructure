@@ -1,0 +1,17 @@
+---
+- name: Setup Gitlab
+  hosts: gitlab
+  become: true
+  
+  vars_files:
+    - vars/credentials.yml
+    - vars/ports.yml
+
+  roles:
+    - role: gitlab-docker
+      gitlab_config_dir: /etc/gitlab
+      gitlab_version: 13.0.5-ce.0
+      gitlab_data_volume_name: gitlab_data
+      gitlab_http_port: "{{ports_gitlab_http}}"
+      gitlab_https_port: "{{ports_gitlab_https}}"
+      gitlab_ssh_port: "{{ports_gitlab_ssh}}"

@@ -1,0 +1,31 @@
+---
+- name: create {{gitlab_config_dir}}
+  file:
+    path: "{{gitlab_config_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: Save gitlab config file
+  template:
+    src: ../templates/gitlab.yml.j2
+    dest: "{{gitlab_config_dir}}/gitlab.yml"
+    mode: '0644'
+
+- name: create gitlab data volume
+  docker_volume:
+    name: "{{gitlab_data_volume_name}}"
+
+- name: start gitlab container
+  docker_container:
+    name: gitlab
+    image: gitlab/gitlab-ce:{{gitlab_version}}
+    pull: true
+    state: started
+    restart_policy: always
+    ports:
+    - "{{gitlab_http_port}}:80"
+    - "{{gitlab_https_port}}:443"
+    - "{{gitlab_ssh_port}}:22"
+    volumes:
+    - "{{gitlab_config_dir}}:/etc/gitlab"
+    - "{{gitlab_data_volume_name}}:/var/opt/gitlab"

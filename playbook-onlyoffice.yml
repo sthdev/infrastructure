@@ -1,0 +1,13 @@
+---
+- name: Setup OnlyOffice
+  hosts: onlyoffice
+  become: true
+  
+  vars_files:
+    - vars/credentials.yml
+    - vars/ports.yml
+
+  roles:
+    - role: onlyoffice-docker
+      onlyoffice_mysql_root_passwort: "{{oo_mysql_root_pw}}"
+      onlyoffice_mysql_user_password: "{{oo_mysql_user_pw}}"

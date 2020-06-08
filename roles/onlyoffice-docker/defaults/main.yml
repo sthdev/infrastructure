@@ -1,0 +1,8 @@
+---
+onlyoffice_mysql_root_password: changeme
+onlyoffice_network_name: onlyoffice_network
+onlyoffice_mysql_data_volume_name: onlyoffice_mysql_data
+onlyoffice_mysql_config_dir: /etc/onlyoffice/mysql/config
+onlyoffice_mysql_initdb_dir: /etc/onlyoffice/mysql/initdb
+onlyoffice_mysql_version: 5.7
+onlyoffice_mysql_user_password: changeme

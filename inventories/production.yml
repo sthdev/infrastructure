@@ -18,6 +18,7 @@ all:
     metricbeat:
       hosts:
         srv1.fritz.box:
+        office.fritz.box:
     ttrss:
       hosts:
         srv1.fritz.box:        

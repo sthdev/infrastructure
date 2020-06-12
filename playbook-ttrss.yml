@@ -5,10 +5,9 @@
 
   vars_files:
     - vars/credentials.yml
-    - vars/ports.yml
     
   roles:
     - role: ttrss-docker
       ttrss_config_dir: "/usr/share/ttrss"
-      ttrss_port: "{{ports_ttrss}}"
+      ttrss_port: 80
       ttrss_public_url: "{{ttrss_url}}"

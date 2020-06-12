@@ -7,11 +7,12 @@ all:
       ansible_python_interpreter: /usr/bin/python3
     office.fritz.box:
       ansible_user: master
-      # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
     dev.fritz.box:
       ansible_user: master
-      # There is no python command on this host. Explicitly specify the python interpreter to use.
+      ansible_python_interpreter: /usr/bin/python3
+    ttrss.fritz.box:
+      ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
   children:
     portainer:
@@ -28,9 +29,10 @@ all:
         srv1.fritz.box:
         office.fritz.box:
         dev.fritz.box:
+        ttrss.fritz.box:
     ttrss:
       hosts:
-        srv1.fritz.box:        
+        ttrss.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

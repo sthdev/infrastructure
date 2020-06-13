@@ -13,7 +13,7 @@ systemctl stop {{item}}
 
 {% for item in system_backup_dirs %}
 echo "Backing up {{item}}..."
-rsync -az --archive --relative {{item}} {{system_backup_mount_point}}
+rsync -azv --archive --relative --delete "{{item}}" "{{system_backup_mount_point}}"
 {% endfor %}
 
 {% for item in system_backup_stopped_services %}
@@ -22,7 +22,7 @@ systemctl start {{item}}
 {% endfor %}
 
 echo "Unmount remote share {{system_backup_remote_target_dir}}"
-umount {{system_backup_remote_target_dir}}
+umount "{{system_backup_remote_target_dir}}"
 
 echo "Delete mount point {{system_backup_mount_point}}"
-rm -rfv {{system_backup_mount_point}}
+rm -rfv "{{system_backup_mount_point}}"

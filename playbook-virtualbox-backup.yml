@@ -1,6 +1,6 @@
 ---
-- name: Setup backup
-  hosts: all
+- name: Setup virtualbox backup
+  hosts: virtualbox
   become: true
 
   vars_files:
@@ -8,13 +8,11 @@
 
   roles:
     - role: system-backup
-      system_backup_dir: /usr/share/system-backup
-      system_backup_stopped_services: 
-        - docker.service
+      system_backup_dir: /usr/bin/system-backup
+      system_backup_stopped_services: [] 
       system_backup_mount_point: /mnt/backup
       system_backup_remote_target_dir: "{{system_backup_remote_root_dir}}{{inventory_hostname_short}}"
       system_backup_dirs:
-        - /var/lib/docker
-        - /home/virtualbox
+        - "/home/virtualbox/VirtualBox VMs"
       system_backup_cron_hour: 0
       system_backup_cron_min: 0

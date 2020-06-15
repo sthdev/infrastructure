@@ -1,0 +1,26 @@
+---
+- name: Install nfs-common
+  package:
+    name: nfs-common
+
+- name: Create backup scripts directory
+  file:
+    path: "{{virtualbox_vm_backup_script_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: Save backup scripts
+  template:
+    src: ../templates/virtualbox-vm-backup.sh.j2    
+    dest: "{{virtualbox_vm_backup_script_dir}}/backup-{{item.vm_name}}.sh"
+    mode: '0755'
+  loop: "{{virtualbox_vm_backup_vms}}"
+
+- name: Set up cron jobs
+  cron:
+    name: "Backup VM {{item.vm_name}}"
+    minute: "{{item.cron_min}}"
+    hour: "{{item.cron_hour}}"
+    job: "{{virtualbox_vm_backup_script_dir}}/backup-{{item.vm_name}}.sh"
+    user: "{{virtualbox_vm_backup_user}}"
+  loop: "{{virtualbox_vm_backup_vms}}"

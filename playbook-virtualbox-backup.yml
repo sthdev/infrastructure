@@ -7,12 +7,18 @@
     - vars/credentials.yml
 
   roles:
-    - role: system-backup
-      system_backup_dir: /usr/bin/system-backup
-      system_backup_stopped_services: [] 
-      system_backup_mount_point: /mnt/backup
-      system_backup_remote_target_dir: "{{system_backup_remote_root_dir}}{{inventory_hostname_short}}"
-      system_backup_dirs:
-        - "/home/virtualbox/VirtualBox VMs"
-      system_backup_cron_hour: 0
-      system_backup_cron_min: 0
+    - role: virtualbox-vm-backup
+      virtualbox_vm_backup_script_dir: /home/virtualbox/backup-scripts
+      virtualbox_vm_backup_mount_point: /mnt/backup
+      virtualbox_vm_backup_remote_target_dir: "{{virtualbox_vm_backup_remote_root_dir}}{{inventory_hostname_short}}/VMs"
+      virtualbox_vm_backup_user: virtualbox
+      virtualbox_vm_backup_vms:
+        - vm_name: ttrss
+          cron_hour: 0
+          cron_min: 0
+        - vm_name: office
+          cron_hour: 0
+          cron_min: 30
+        - vm_name: dev
+          cron_hour: 1
+          cron_min: 0

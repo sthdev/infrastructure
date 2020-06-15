@@ -1,0 +1,6 @@
+---
+virtualbox_vm_backup_script_dir: /home/virtualbox/backup-scripts
+virtualbox_vm_backup_mount_point: /mnt/backup
+virtualbox_vm_backup_remote_target_dir: ""
+virtualbox_vm_backup_vms: []
+virtualbox_vm_backup_user: virtualbox

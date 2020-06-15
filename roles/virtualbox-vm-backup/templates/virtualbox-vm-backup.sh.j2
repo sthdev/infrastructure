@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "Sending ACPI power button event to VM {{item.vm_name}}..."
+vboxmanage controlvm {{item.vm_name}} acpipowerbutton
+
+until vboxmanage showvminfo {{item.vm_name}} --machinereadable | grep VMState=\"poweroff\"
+do
+        echo "Waiting for VM {{item.vm_name}} to shutdown..."
+        sleep 1s
+done
+
+echo "VM {{item.vm_name}} has shut down"
+
+echo "Exporting VM..."
+vboxmanage export {{item.vm_name}} -o /tmp/{{item.vm_name}}.ova
+
+echo "Restarting VM..."
+vboxmanage startvm {{item.vm_name}} --type headless
+
+echo "Creating mount point {{virtualbox_vm_backup_mount_point}}..."
+sudo mkdir {{virtualbox_vm_backup_mount_point}}
+sudo mount {{virtualbox_vm_backup_remote_target_dir}} {{virtualbox_vm_backup_mount_point}}
+
+echo "Copying exported VM to {{virtualbox_vm_backup_remote_target_dir}}..."
+sudo mv /tmp/{{item.vm_name}}.ova {{virtualbox_vm_backup_mount_point}}/{{item.vm_name}}.ova
+
+echo "Deleting mount point {{virtualbox_vm_backup_mount_point}}..."
+sudo umount {{virtualbox_vm_backup_mount_point}}
+sudo rm -rfv {{virtualbox_vm_backup_mount_point}}
+
+echo "Backup of VM {{item.vm_name}} successful."

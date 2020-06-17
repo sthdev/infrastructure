@@ -32,7 +32,7 @@ all:
         ttrss.fritz.box:
     ttrss:
       hosts:
-        ttrss.fritz.box:
+        srv1.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

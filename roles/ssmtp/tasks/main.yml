@@ -1,0 +1,16 @@
+---
+- name: Install sSMTP
+  package:
+    name: ssmtp
+
+- name: Create ssmtp.conf
+  template:
+    src: ../templates/ssmtp.conf.j2
+    dest: "/etc/ssmtp/ssmtp.conf"
+    mode: '0600'
+
+- name: Create revaliases
+  template:
+    src: ../templates/revaliases.j2
+    dest: "/etc/ssmtp/revaliases"
+    mode: '0600'

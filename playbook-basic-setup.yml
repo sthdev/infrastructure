@@ -19,6 +19,8 @@
       pip_package: python3-pip
       pip_executable: pip3
 
+    - role: ssmtp
+
   tasks:
     - name: Create directory for Docker daemon config
       file:
@@ -35,6 +37,12 @@
           ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
       notify: restart docker
   
+    - name: Add MAILTO entry to crontab
+      cron:
+        name: MAILTO
+        env: yes
+        job: "{{ssmtp_root}}"
+
     - name: Enable passwordless sudo
       lineinfile:
         path: /etc/sudoers

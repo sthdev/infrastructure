@@ -17,7 +17,7 @@ all:
   children:
     portainer:
       hosts:
-        dev.fritz.box:
+        srv1.fritz.box:
     elastic:
       hosts:
         dev.fritz.box:

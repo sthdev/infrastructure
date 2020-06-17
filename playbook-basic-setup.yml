@@ -43,6 +43,10 @@
         line: '%sudo ALL=(ALL) NOPASSWD: ALL'
         validate: '/usr/sbin/visudo -cf %s'
 
+    - name: Set timezone to Berlin
+      timezone:
+        name: Europe/Berlin
+
     - name: Set up NFS share
       block:
         - name: Install nfs-common

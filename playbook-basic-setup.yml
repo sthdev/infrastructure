@@ -3,6 +3,10 @@
   hosts: all
   become: true
 
+  vars_files:
+    - vars/credentials.yml
+    - vars/main.yml
+  
   roles:
     - role: geerlingguy.docker
       docker_compose_version: "1.25.5"
@@ -16,14 +20,6 @@
       pip_executable: pip3
 
   tasks:
-    - name: Enable passwordless sudo
-      lineinfile:
-        path: /etc/sudoers
-        state: present
-        regexp: '^%sudo ALL='
-        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-        validate: '/usr/sbin/visudo -cf %s'
-
     - name: Create directory for Docker daemon config
       file:
         path: /etc/systemd/system/docker.service.d/
@@ -39,6 +35,52 @@
           ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
       notify: restart docker
   
+    - name: Enable passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo ALL='
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+
+    - name: Set up NFS share
+      block:
+        - name: Install nfs-common
+          package:
+            name: nfs-common
+
+        - name: Create mount point
+          file:
+            path: "{{backup_mount_point}}"
+            state: directory
+            mode: '0755'
+
+        - name: Mount {{backup_mount_point}}
+          mount:
+            src: "{{remote_backup_nfs_share}}"
+            path: "{{backup_mount_point}}"
+            state: mounted
+            fstype: nfs
+            boot: no
+
+        - name: Create dir for this server in remote mount point
+          file:
+            path: "{{backup_mount_point}}/{{inventory_hostname_short}}"
+            state: directory
+            mode: '0755'
+
+        - name: Unmount {{backup_mount_point}}
+          mount:
+            path: "{{backup_mount_point}}"
+            state: unmounted
+
+        - name: Remount {{backup_mount_point}}
+          mount:
+            src: "{{remote_backup_nfs_share}}/{{inventory_hostname_short}}"
+            path: "{{backup_mount_point}}"
+            state: mounted
+            fstype: nfs
+
   handlers:
     - name: restart docker
       service:

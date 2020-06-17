@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Stopping docker daemon"
+service docker stop
+
+cd {{docker_services_root}}
+rsync --verbose --archive --relative --delete . {{backup_mount_point}}
+
+echo "Starting docker daemon"
+service docker start

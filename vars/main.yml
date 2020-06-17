@@ -1,2 +1,6 @@
 ---
 backup_mount_point: /mnt/backup
+docker_services_root: /etc/docker-services
+docker_services_backup:
+  cron_hour: "*"
+  cron_min: "*"

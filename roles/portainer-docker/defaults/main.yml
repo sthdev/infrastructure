@@ -1,7 +1,8 @@
 ---
+docker_services_root: /etc/docker-services
+
 portainer_host: portainer
 portainer_port: 9000
-portainer_data_volume_name: portainer_data
 portainer_version: latest
 
 portainer_ldap_url: ""

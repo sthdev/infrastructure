@@ -1,22 +1,19 @@
 ---
-- name: create portainer data volume
-  docker_volume:
-    name: "{{portainer_data_volume_name}}"
+- name: Create portainer config dir
+  file:
+    path: "{{docker_services_root}}/portainer"
+    state: directory
+    mode: '0600'
 
-- name: start portainer container
-  docker_container:
-    name: portainer
-    image: portainer/portainer:{{portainer_version}}
-    pull: true
-    state: started
-    ports:
-      - "{{portainer_port}}:9000"
-    restart_policy: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - "{{portainer_data_volume_name}}:/data" 
-    # requires passlib and bcrypt python modules to be installed on the ansible host
-    command: "--admin-password='{{ portainer_admin_password | password_hash('bcrypt') }}'"
+- name: Create docker-compose file
+  template:
+    src: ../templates/docker-compose.yml.j2
+    dest: "{{docker_services_root}}/portainer/docker-compose.yml"
+    mode: '0600'
+
+- name: Start portainer
+  docker_compose:
+    project_src: "{{docker_services_root}}/portainer"
 
 - name: wait for portainer to start
   wait_for:

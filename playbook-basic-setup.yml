@@ -1,5 +1,5 @@
 ---
-- name: Setup Docker
+- name: Basic Setup
   hosts: all
   become: true
 
@@ -16,6 +16,14 @@
       pip_executable: pip3
 
   tasks:
+    - name: Enable passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo ALL='
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+
     - name: Create directory for Docker daemon config
       file:
         path: /etc/systemd/system/docker.service.d/

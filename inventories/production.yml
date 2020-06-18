@@ -17,7 +17,7 @@ all:
   children:
     portainer:
       hosts:
-        srv1.fritz.box:
+        dev.fritz.box:
     elastic:
       hosts:
         dev.fritz.box:
@@ -32,7 +32,7 @@ all:
         ttrss.fritz.box:
     ttrss:
       hosts:
-        srv1.fritz.box:
+        ttrss.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

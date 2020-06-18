@@ -93,28 +93,6 @@
             state: mounted
             fstype: nfs
 
-    - name: Setup automatic docker-services backup
-      block:
-        - name: Create docker-services dir
-          file:
-              path: "{{docker_services_root}}"
-              state: directory
-              mode: '0755'
-
-        - name: Create backup script
-          template:
-            src: ./templates/backup-docker-services.sh.j2
-            dest: "{{docker_services_root}}/backup-docker-services.sh"
-            mode: '0755'
-
-        - name: Create cronjob
-          cron:
-            name: "Backup {{docker_services_root}} "
-            minute: "{{docker_services_backup.cron_min}}"
-            hour: "{{docker_services_backup.cron_hour}}"
-            job: "{{docker_services_root}}/backup-docker-services.sh"
-            user: root
-
   handlers:
     - name: restart docker
       service:

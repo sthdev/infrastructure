@@ -1,0 +1,13 @@
+---
+- name: Update all packages
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update all packages
+      package:
+        name: '*'
+        state: latest
+
+    - name: Reboot
+      reboot:

@@ -5,3 +5,4 @@ ssmtp_auth_user: CHANGEME
 ssmtp_auth_pass: CHANGEME
 ssmtp_rewrite_domain: CHANGEME
 ssmtp_hostname: CHANGEME
+ssmtp_mail_users: []

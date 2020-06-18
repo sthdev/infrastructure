@@ -18,7 +18,7 @@ vboxmanage export {{item.vm_name}} -o /tmp/{{item.vm_name}}.ova
 echo "Restarting VM..."
 vboxmanage startvm {{item.vm_name}} --type headless
 
-echo "Copying exported VM to {{virtualbox_vm_backup_remote_target_dir}}..."
-mv -vf /tmp/{{item.vm_name}}.ova {{virtualbox_vm_backup_mount_point}}/{{item.vm_name}}.ova
+echo "Copying exported VM to {{virtualbox_vm_backup_mount_point}}//vm-backups/{{item.vm_name}}.ova..."
+mv -vf /tmp/{{item.vm_name}}.ova {{virtualbox_vm_backup_mount_point}}//vm-backups/{{item.vm_name}}.ova
 
 echo "Backup of VM {{item.vm_name}} successful."

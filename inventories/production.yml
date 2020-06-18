@@ -15,6 +15,9 @@ all:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
   children:
+    physical_hosts:
+      hosts:
+        srv1.fritz.box:
     portainer:
       hosts:
         dev.fritz.box:

@@ -8,18 +8,26 @@
 
   roles:
     - role: virtualbox-vm-backup
-      virtualbox_vm_backup_script_dir: /home/virtualbox/backup-scripts
+      virtualbox_vm_backup_script_dir: /etc/virtualbox/backup-scripts
       virtualbox_vm_backup_mount_point: /mnt/backup
       virtualbox_vm_backup_remote_target_dir: "{{virtualbox_vm_backup_remote_root_dir}}{{inventory_hostname_short}}"
       virtualbox_vm_backup_user: virtualbox
       virtualbox_vm_backup_vms:
       # Exporting a VM uses only a single thread.
         - vm_name: ttrss
-          cron_hour: 1
+          cron_hour: 0
           cron_min: 0
         - vm_name: office
-          cron_hour: 1
+          cron_hour: 0
           cron_min: 0
         - vm_name: dev
-          cron_hour: 1
+          cron_hour: 0
           cron_min: 0
+
+  tasks:
+    - name: Add MAILTO entry to crontab
+      cron:
+        name: MAILTO
+        env: yes
+        job: "{{ssmtp_root}}"
+        user: virtualbox

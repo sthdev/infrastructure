@@ -1,7 +1,11 @@
 ---
-- name: Install nfs-common
-  package:
-    name: nfs-common
+- name: Create vm-backups subdir in backup mount point
+  file:
+    path: "{{virtualbox_vm_backup_mount_point}}/vm-backups"
+    state: directory
+    mode: '0755'
+    owner: "{{virtualbox_vm_backup_user}}"
+    group: "{{virtualbox_vm_backup_user_group}}"
 
 - name: Create backup scripts directory
   file:

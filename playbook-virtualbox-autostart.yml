@@ -17,9 +17,10 @@
       dest: "/etc/systemd/system/vm_{{item}}.service"
     loop: "{{virtual_machines}}"
 
-  - name: Enable services
+  - name: Enable and start services
     service:
       name: vm_{{item}}
       enabled: yes
+      state: started
       daemon_reload: yes
     loop: "{{virtual_machines}}"

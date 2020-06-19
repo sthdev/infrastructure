@@ -1,5 +1,0 @@
----
-- name: restart vboxweb-service
-  service:
-    name: vboxweb-service
-    state: restarted

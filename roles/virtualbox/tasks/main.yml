@@ -62,7 +62,7 @@
   notify:
     - restart vboxweb-service
 
-- name: Enable vboxweb deamon on start-up
+- name: "Enable vboxweb deamon on start-up (Note: Sometimes the service starts to early and cannot bind to its port. Restart the service if necessary.)"
   service:
     name: vboxweb-service
     enabled: yes

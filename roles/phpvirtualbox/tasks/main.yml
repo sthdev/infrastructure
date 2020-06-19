@@ -1,22 +1,17 @@
 ---
-- name: start phpVirtualBox docker container
-  docker_container:
-    name: phpvirtualbox
-    image: joweisberg/phpvirtualbox
-    pull: true
-    state: started
-    env:
-      VBOX_HOSTPORT: "{{virtualbox_host}}"
-      VBOX_NAME: "{{virtualbox_servername}}"
-      VBOX_USER: "{{virtualbox_user}}"
-      VBOX_PW: "{{virtualbox_user_password}}"
-      CONF_browserRestrictFolders: "/home"
-      # This does not work. This string is not properly transformed to a map.
-      # CONF_authConfig: "'host'=>'ds.fritz.box','bind_dn'=>'uid=%s,cn=users,dc=stephan-hildebrandt,dc=eu'"
-    ports:
-      "{{php_virtualbox_port}}:80"
-    restart_policy: always
+- name: Create phpvirtualbox config dir
+  file:
+    path: "{{php_virtualbox_config_dir}}"
+    state: directory
+    mode: '0600'
 
-- name: Print note about authentication
-  debug:
-    msg: Default credentials are 'admin'/'admin'. Please change them via UI.
+- name: Create phpVirtualBox compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{php_virtualbox_config_dir}}/docker-compose.yml"
+    mode: '0600'
+
+- name: Start phpVirtualBox docker container
+  docker_compose:
+    project_src: "{{php_virtualbox_config_dir}}"
+    

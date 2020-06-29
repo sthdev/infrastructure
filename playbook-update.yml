@@ -1,6 +1,6 @@
 ---
-- name: Update all packages
-  hosts: all
+- name: Update all packages on virtual hosts
+  hosts: virtual_hosts
   become: true
 
   tasks:

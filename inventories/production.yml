@@ -18,6 +18,11 @@ all:
     physical_hosts:
       hosts:
         srv1.fritz.box:
+    virtual_hosts:
+      hosts:
+        office.fritz.box
+        dev.fritz.box
+        ttrss.fritz.box
     portainer:
       hosts:
         dev.fritz.box:

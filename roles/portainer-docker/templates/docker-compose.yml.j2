@@ -7,6 +7,9 @@ services:
     - {{portainer_port}}:9000
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - ./data:/data
+    - data:/data
     restart: always
     command: --admin-password "{{ portainer_admin_password | password_hash('bcrypt') | replace('$','$$')}}"
+
+volumes:
+  data:

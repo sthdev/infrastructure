@@ -9,6 +9,9 @@ all:
     portainer:
       hosts:
         test.fritz.box:
+    drawio:
+      hosts:
+        test.fritz.box:
     elastic:
       hosts:
         test.fritz.box:

@@ -15,3 +15,4 @@ ports:
   gitlab_http: 8086
   gitlab_https: 8087
   gitlab_ssh: 8088
+  drawio: 8089

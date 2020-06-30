@@ -1,0 +1,12 @@
+- name: Setup drawio
+  hosts: drawio
+  become: true
+  
+  vars_files:
+    - vars/credentials.yml
+    - vars/main.yml
+
+  roles:
+    - role: drawio-docker
+      drawio_version: 13.3.5
+      drawio_http_port: "{{ports.drawio}}"

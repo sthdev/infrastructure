@@ -1,28 +1,22 @@
 ---
-- name: create {{metricbeat_config_dir}}
+- name: create {{docker_services_root}}/metricbeat
   file:
-    path: "{{metricbeat_config_dir}}"
+    path: "{{docker_services_root}}/metricbeat"
     state: directory
-    mode: '0755'
+    mode: '0600'
 
 - name: Save metricbeat config file
   template:
     src: ../templates/metricbeat.yml.j2
-    dest: "{{metricbeat_config_dir}}/metricbeat.yml"
-    mode: '0644'
+    dest: "{{docker_services_root}}/metricbeat/metricbeat.yml"
+    mode: '0600'
 
-- name: start metricbeat container
-  docker_container:
-    name: metricbeat
-    image: docker.elastic.co/beats/metricbeat:{{metricbeat_version}}
-    pull: true
-    state: started
-    restart_policy: always
-    network_mode: host
-    volumes:
-        - "{{metricbeat_config_dir}}/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro"
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-        - /proc:/hostfs/proc:ro
-        - /:/hostfs:ro
-    user: root
+- name: Create docker-compose file
+  template:
+    src: ../templates/docker-compose.yml.j2
+    dest: "{{docker_services_root}}/metricbeat/docker-compose.yml"
+    mode: '0600'
+
+- name: Start metricbeat
+  docker_compose:
+    project_src: "{{docker_services_root}}/metricbeat"

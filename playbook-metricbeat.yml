@@ -4,16 +4,16 @@
 
   vars_files:
     - vars/credentials.yml
-    - vars/ports.yml
+    - vars/main.yml
   
   roles:
     - role: metricbeat-docker
-      metricbeat_version: 7.7.1
+      metricbeat_version: 7.8.0
       metricbeat_kibana_host: "{{groups['elastic'][0]}}"
-      metricbeat_kibana_port: "{{ports_kibana}}"
+      metricbeat_kibana_port: "{{ports.kibana}}"
       metricbeat_kibana_username: "{{elastic_username}}"
       metricbeat_kibana_password: "{{elastic_password}}"
       metricbeat_elasticsearch_host: "{{groups['elastic'][0]}}"
-      metricbeat_elasticsearch_port: "{{ports_elasticsearch_rest}}"
+      metricbeat_elasticsearch_port: "{{ports.elasticsearch_rest}}"
       metricbeat_elasticsearch_username: "{{elastic_username}}"
       metricbeat_elasticsearch_password: "{{elastic_password}}"

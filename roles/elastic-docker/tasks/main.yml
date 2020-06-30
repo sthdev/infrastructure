@@ -5,95 +5,36 @@
   with_items:
     - { key: "vm.max_map_count", value: "262144" }
 
-- name: create elastic_network network
-  docker_network:
-    name: "elastic_network"
-    internal: no
-
-- name: create elasticsearch data volume
-  docker_volume:
-    name: "{{elasticsearch_data_volume_name}}"
-
-- name: create kibana data volume
-  docker_volume:
-    name: "{{kibana_data_volume_name}}"
-
-- name: create {{elasticsearch_config_dir}}
+- name: create {{docker_services_root}}/elastic
   file:
-    path: "{{elasticsearch_config_dir}}"
+    path: "{{docker_services_root}}/elastic"
     state: directory
-    mode: '0755'
+    mode: '0644'
 
 - name: create {{kibana_config_dir}}
   file:
     path: "{{kibana_config_dir}}"
     state: directory
-    mode: '0755'
+    mode: '0644'
 
 - name: create elasticsearch config file
   template:
-    src: templates/elasticsearch/elasticsearch.yml.j2
-    dest: "{{elasticsearch_config_dir}}/elasticsearch.yml"
+    src: templates/elasticsearch.yml.j2
+    dest: "{{docker_services_root}}/elastic/elasticsearch.yml"
+    mode: '0644'
 
 - name: create kibana config file
   template:
-    src: templates/kibana/kibana.yml.j2
-    dest: "{{kibana_config_dir}}/kibana.yml"
+    src: templates/kibana.yml.j2
+    dest: "{{docker_services_root}}/elastic/kibana.yml"
+    mode: '0644'
 
-- name: stop elasticsearch container
-  docker_container:
-    name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:{{elasticsearch_version}}
-    state: stopped
-
-- name: start elasticsearch container
-  docker_container:
-    name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:{{elasticsearch_version}}
-    pull: true
-    state: started
-    env:
-      node.name: elasticsearch
-      "bootstrap.memory_lock": "true"
-      ES_JAVA_OPTS: "-Xms{{elasticsearch_heap_size}} -Xmx{{elasticsearch_heap_size}}"
-      ELASTIC_PASSWORD: "{{elasticsearch_admin_password}}"
-    networks:
-      - name: "elastic_network"
-    networks_cli_compatible: yes
-    ports:
-      - "{{elasticsearch_rest_port}}:9200"
-      - "{{elasticsearch_nodes_port}}:9300"
-    restart_policy: always
-    volumes:
-      - "{{elasticsearch_data_volume_name}}:/data"
-      - "{{elasticsearch_config_dir}}/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
-    ulimits:
-      - nofile:65535:65535
-      - memlock:-1:-1
-
-- name: stop kibana container
-  docker_container:
-    name: kibana
-    hostname: kibana
-    image: docker.elastic.co/kibana/kibana:{{kibana_version}}
-    state: stopped
-
-- name: start kibana container
-  docker_container:
-    name: kibana
-    hostname: kibana
-    image: docker.elastic.co/kibana/kibana:{{kibana_version}}
-    state: started
-    env:
-      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
-      SERVER_NAME: kibana
-      SERVER_HOST: 0.0.0.0
-    networks:
-      - name: "elastic_network"
-    networks_cli_compatible: yes
-    ports:
-      - "{{kibana_port}}:5601"
-    restart_policy: always
-    volumes:
-      - "{{kibana_data_volume_name}}:/usr/share/kibana/data"
-      - "{{kibana_config_dir}}/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
+- name: Create docker-compose file
+  template:
+    src: ../templates/docker-compose.yml.j2
+    dest: "{{docker_services_root}}/elastic/docker-compose.yml"
+    mode: '0600'
+  
+- name: Start elastic stack
+  docker_compose:
+    project_src: "{{docker_services_root}}/elastic"

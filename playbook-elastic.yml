@@ -4,14 +4,14 @@
 
   vars_files:
     - vars/credentials.yml
-    - vars/ports.yml
+    - vars/main.yml
   
   roles:
     - role: elastic-docker
-      elasticsearch_version: 7.7.1
-      elasticsearch_rest_port: "{{ports_elasticsearch_rest}}"
-      elasticsearch_nodes_port: "{{ports_elasticsearch_nodes}}"
-      kibana_version: 7.7.1
-      kibana_port: "{{ports_kibana}}"
+      elasticsearch_version: 7.8.0
+      elasticsearch_rest_port: "{{ports.elasticsearch_rest}}"
+      elasticsearch_nodes_port: "{{ports.elasticsearch_nodes}}"
+      kibana_version: 7.8.0
+      kibana_port: "{{ports.kibana}}"
       elasticsearch_admin_username: "{{elastic_username}}"
       elasticsearch_admin_password: "{{elastic_password}}"

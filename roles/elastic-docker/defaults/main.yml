@@ -4,7 +4,6 @@ elasticsearch_rest_port: 9200
 elasticsearch_nodes_port: 9300
 elasticsearch_heap_size: 2g
 elasticsearch_data_volume_name: elastic_data
-elasticsearch_config_dir: /var/elasticsearch/config
 elasticsearch_admin_username: elastic
 elasticsearch_admin_password: changeme
 

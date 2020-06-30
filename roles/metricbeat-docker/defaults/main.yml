@@ -1,5 +1,4 @@
 ---
-metricbeat_config_dir: /var/metricbeat/config
 metricbeat_version: 7.7.1
 metricbeat_kibana_host: kibana
 metricbeat_kibana_port: 80

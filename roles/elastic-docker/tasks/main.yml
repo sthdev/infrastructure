@@ -11,12 +11,6 @@
     state: directory
     mode: '0644'
 
-- name: create {{kibana_config_dir}}
-  file:
-    path: "{{kibana_config_dir}}"
-    state: directory
-    mode: '0644'
-
 - name: create elasticsearch config file
   template:
     src: templates/elasticsearch.yml.j2

@@ -6,9 +6,10 @@
   vars:
     virtualbox_user: virtualbox
     virtual_machines:
-      - ttrss
-      - office
       - dev
+      - glrunner1
+      - office
+      - ttrss
 
   tasks:
   - name: Create service config file

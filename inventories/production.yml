@@ -5,10 +5,13 @@ all:
       ansible_user: master
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
-    office.fritz.box:
+    dev.fritz.box:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
-    dev.fritz.box:
+    glrunner1.fritz.box:
+      ansible_user: master
+      ansible_python_interpreter: /usr/bin/python3
+    office.fritz.box:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
     ttrss.fritz.box:
@@ -20,8 +23,9 @@ all:
         srv1.fritz.box:
     virtual_hosts:
       hosts:
-        office.fritz.box:
         dev.fritz.box:
+        glrunner1.fritz.box:
+        office.fritz.box:
         ttrss.fritz.box:
     portainer:
       hosts:
@@ -32,11 +36,15 @@ all:
     gitlab:
       hosts:
         dev.fritz.box:
+    gitlab_runner:
+      hosts:
+        glrunner1.fritz.box:      
     metricbeat:
       hosts:
         srv1.fritz.box:
-        office.fritz.box:
         dev.fritz.box:
+        glrunner1.fritz.box:
+        office.fritz.box:
         ttrss.fritz.box:
     ttrss:
       hosts:

@@ -20,9 +20,9 @@ all:
         srv1.fritz.box:
     virtual_hosts:
       hosts:
-        office.fritz.box
-        dev.fritz.box
-        ttrss.fritz.box
+        office.fritz.box:
+        dev.fritz.box:
+        ttrss.fritz.box:
     portainer:
       hosts:
         srv1.fritz.box:

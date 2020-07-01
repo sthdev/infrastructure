@@ -20,6 +20,13 @@
       pip_executable: pip3
 
     - role: ssmtp
+      ssmtp_root: "{{smtp.sender}}"
+      ssmtp_mailhub: "{{smtp.server}}:{{smtp.port}}"
+      ssmtp_auth_user: "{{smtp.auth_user}}"
+      ssmtp_auth_pass: "{{smtp.auth_pass}}"
+      ssmtp_rewrite_domain: "{{smtp.rewrite_domain}}"
+      ssmtp_hostname: "{{smtp.hostname}}"
+      ssmtp_mail_users: "{{smtp.mail_users}}"
 
   tasks:
     - name: Create directory for Docker daemon config

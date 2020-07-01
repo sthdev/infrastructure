@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:{{gitlab_version}}
+    restart: always
+    ports:
+    - "{{gitlab_http_port}}:80"
+    - "{{gitlab_https_port}}:443"
+    - "{{gitlab_ssh_port}}:22"
+    volumes:
+    - ./:/etc/gitlab/
+    - data:/var/opt/gitlab
+    - logs:/var/log/gitlab
+
+volumes:
+  data:
+  logs:

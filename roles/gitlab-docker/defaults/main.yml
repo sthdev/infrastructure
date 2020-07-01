@@ -1,8 +1,23 @@
 ---
-gitlab_config_dir: /etc/gitlab
+gitlab_config_dir: /etc/docker-services/gitlab
 gitlab_version: latest
-gitlab_data_volume_name: gitlab_data
 
 gitlab_http_port: 80
 gitlab_https_port: 443
 gitlab_ssh_port: 22
+
+gitlab_ldap_host: ""
+gitlab_ldap_port: 636
+gitlab_ldap_username_attribute: "uid"
+gitlab_ldap_bind_dn: ""
+gitlab_ldap_bind_dn_password: ""
+gitlab_ldap_base_dn: ""
+gitlab_ldap_encryption: "plain"
+gitlab_ldap_verify_certificates: true
+
+gitlab_smtp_server: smtp.example.com
+gitlab_smtp_port: 465
+gitlab_smtp_username: CHANGEME
+gitlab_smtp_password: CHANGEME
+gitlab_smtp_domain: example.com
+gitlab_smtp_sender_address: sender@example.com

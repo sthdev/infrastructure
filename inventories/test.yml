@@ -6,6 +6,9 @@ all:
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
   children:
+    virtual_hosts:
+      hosts:
+        test.fritz.box:
     portainer:
       hosts:
         test.fritz.box:
@@ -22,6 +25,9 @@ all:
       hosts:
         test.fritz.box:
     onlyoffice:
+      hosts:
+        test.fritz.box:
+    sonarqube:
       hosts:
         test.fritz.box:
     ttrss:

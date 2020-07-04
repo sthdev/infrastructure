@@ -1,0 +1,20 @@
+---
+- name: Create {{sonarqube_config_dir}}
+  file:
+    path: "{{sonarqube_config_dir}}"
+    state: directory
+    mode: '0600'
+
+- name: Create docker-compose file
+  template:
+    src: ../templates/docker-compose.yml.j2
+    dest: "{{sonarqube_config_dir}}/docker-compose.yml"
+    mode: '0600'
+
+- name: Start SonarQube
+  docker_compose:
+    project_src: "{{sonarqube_config_dir}}"
+
+- name: Authentication info
+  debug:
+    msg: Default credentials are 'admin'/'admin'.

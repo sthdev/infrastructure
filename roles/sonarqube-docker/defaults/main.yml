@@ -1,0 +1,5 @@
+---
+sonarqube_config_dir: /etc/docker-services/sonarqube
+sonarqube_version: latest
+sonarqube_postgres_version: latest
+sonarqube_port: 9000

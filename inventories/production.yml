@@ -46,6 +46,9 @@ all:
         glrunner1.fritz.box:
         office.fritz.box:
         ttrss.fritz.box:
+    sonarqube:
+      hosts:
+        dev.fritz.box:
     ttrss:
       hosts:
         ttrss.fritz.box:

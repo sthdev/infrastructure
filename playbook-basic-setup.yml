@@ -29,6 +29,11 @@
       ssmtp_mail_users: "{{smtp.mail_users}}"
 
   tasks:
+    - name: Increate vm.max_map_count
+      sysctl:
+        name: vm.max_map_count
+        value: 262144
+
     - name: Create directory for Docker daemon config
       file:
         path: /etc/systemd/system/docker.service.d/

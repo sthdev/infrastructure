@@ -24,6 +24,9 @@ all:
     metricbeat:
       hosts:
         test.fritz.box:
+    nexus:
+      hots:
+        test.fritz.box:
     onlyoffice:
       hosts:
         test.fritz.box:

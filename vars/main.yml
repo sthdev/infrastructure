@@ -17,3 +17,4 @@ ports:
   gitlab_ssh: 8088
   drawio: 8089
   sonarqube: 8090
+  nexus: 8091

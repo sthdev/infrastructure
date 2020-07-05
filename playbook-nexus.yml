@@ -1,0 +1,13 @@
+- name: Setup Nexus repository
+  hosts: nexus
+  become: true
+  
+  vars_files:
+    - vars/credentials.yml
+    - vars/main.yml
+
+  roles:
+    - role: nexus-docker
+      nexus_config_dir: "{{docker_services_root}}/nexus"
+      nexus_port: "{{ports.nexus}}"
+      nexus_version: 3.24.0

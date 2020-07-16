@@ -3,3 +3,4 @@
 - import_playbook: docker.yml
 - import_playbook: ssmtp.yml
 - import_playbook: update.yml
+- import_playbook: portainer.yml

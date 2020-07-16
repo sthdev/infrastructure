@@ -1,6 +1,6 @@
 ---
 - name: Basic Setup
-  hosts: all
+  hosts: docker_hosts
   become: true
 
   vars_files:

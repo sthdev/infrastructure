@@ -21,7 +21,7 @@ all:
     physical_hosts:
       hosts:
         srv1.fritz.box:
-    virtual_hosts:
+    docker_hosts:
       hosts:
         dev.fritz.box:
         glrunner1.fritz.box:

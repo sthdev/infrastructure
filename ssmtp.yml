@@ -3,10 +3,6 @@
   hosts: ssmtp
   become: true
 
-  vars_files:
-    - ../vars/credentials.yml
-    - ../vars/main.yml
-
   tasks:
     - name: Install sSMTP
       package:

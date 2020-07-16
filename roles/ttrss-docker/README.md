@@ -1,1 +1,0 @@
-This role sets up TinyTiny RSS in a docker container.

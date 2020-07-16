@@ -1,1 +1,0 @@
-This is a stripped-down version of https://github.com/mediapeers/ansible-role-virtualbox.

@@ -16,9 +16,10 @@ all:
       hosts:
         srv1.fritz.box:
     docker:
-      portainer:
-        hosts:
-          srv1.fritz.box:
+      children:
+        portainer:
+          hosts:
+            srv1.fritz.box:
     k8s:
       children:
         k8s_controller:

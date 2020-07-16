@@ -1,2 +1,3 @@
 ---
 - import_playbook: playbooks/all.yml
+- import_playbook: playbooks/update.yml

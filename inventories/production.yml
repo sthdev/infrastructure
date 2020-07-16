@@ -28,6 +28,9 @@ all:
         k8s_worker:
           hosts:
             kube2.fritz.box:
+    ssmtp:
+      hosts:
+        srv1.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

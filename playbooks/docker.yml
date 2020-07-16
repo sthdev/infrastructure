@@ -19,7 +19,7 @@
     - name: Increate vm.max_map_count
       sysctl:
         name: vm.max_map_count
-        value: 262144
+        value: "262144"
 
     - name: Create directory for Docker daemon config
       file:

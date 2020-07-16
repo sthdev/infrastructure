@@ -1,0 +1,10 @@
+root={{smtp.sender}}
+mailhub={{smtp.server}}:{{smtp.port}}
+
+UseTLS=Yes
+UseSTARTTLS=Yes
+AuthUser={{smtp.auth_user}}
+AuthPass={{smtp.auth_pass}}
+rewriteDomain={{smtp.rewrite_domain}}
+hostname={{smtp.hostname}}
+FromLineOverride=YES

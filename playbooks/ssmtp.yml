@@ -26,3 +26,9 @@
         group: mail
         append: true
       loop: "{{smtp.mail_users}}"
+
+    - name: Add MAILTO entry to crontab
+      cron:
+        name: MAILTO
+        env: yes
+        job: "{{smtp.sender}}"

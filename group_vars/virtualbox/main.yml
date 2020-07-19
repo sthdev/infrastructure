@@ -12,7 +12,6 @@ virtualbox_port: 18083
 
 autostart_virtual_machines:
   - office
-  - ttrss
   - kube1
   - kube2
 
@@ -25,9 +24,6 @@ backup_vms:
     cron_hour: 0
     cron_min: 0
   - vm_name: office
-    cron_hour: 0
-    cron_min: 0
-  - vm_name: ttrss
     cron_hour: 0
     cron_min: 0
 

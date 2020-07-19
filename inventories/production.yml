@@ -8,9 +8,6 @@ all:
     office.fritz.box:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
-    ttrss.fritz.box:
-      ansible_user: master
-      ansible_python_interpreter: /usr/bin/python3
     kube1.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
@@ -26,9 +23,6 @@ all:
         portainer:
           hosts:
             srv1.fritz.box:
-        ttrss:
-          hosts:
-            ttrss.fritz.box:        
     k8s:
       children:
         k8s_controller:
@@ -41,7 +35,6 @@ all:
       hosts:
         srv1.fritz.box:
         office.fritz.box:
-        ttrss.fritz.box:    
     virtualbox:
       hosts:
         srv1.fritz.box:

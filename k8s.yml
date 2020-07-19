@@ -4,6 +4,10 @@
   become: true
 
   tasks:
+  - name: Install nfs
+    package:
+      name: nfs-common
+
   - name: Install microk8s
     snap:
       name: microk8s

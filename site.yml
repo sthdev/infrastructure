@@ -5,3 +5,4 @@
 - import_playbook: update.yml
 - import_playbook: virtualbox.yml
 - import_playbook: portainer.yml
+- import_playbook: k8s.yml

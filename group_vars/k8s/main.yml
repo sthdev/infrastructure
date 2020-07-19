@@ -1,0 +1,9 @@
+---
+k8s_addons:
+  - dns
+  - dashboard
+  - helm3
+
+bash_aliases:
+  - "alias kubectl='microk8s.kubectl'"
+  - "alias helm='microk8s.helm3'"

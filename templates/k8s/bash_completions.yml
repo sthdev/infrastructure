@@ -1,0 +1,6 @@
+- command: "{{item.script_generation_command}}"
+  register: "bash_completion_output"
+
+- copy:
+    content: "{{bash_completion_output.stdout}}"
+    dest: "/etc/bash_completion.d/{{item.command}}"

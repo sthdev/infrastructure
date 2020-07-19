@@ -33,15 +33,10 @@
       create: true
     with_items: "{{bash_aliases}}"
 
-# TODO Generalize so that bash completion for other commands can be easily added.
-  - name: Set up kubectl bash completion
-    block:
-      - command: /snap/bin/microk8s.kubectl completion bash
-        register: bash_completion_output
-
-      - copy:
-          content: "{{bash_completion_output.stdout}}"
-          dest: /etc/bash_completion.d/kubectl
+  - name: Set up bash completions
+    include: templates/k8s/bash_completions.yml
+    with_items: "{{bash_completions}}"
+    
 
 - name: Set up microk8s workers
   hosts: k8s_worker

@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.4'
 
 services:
   portainer:
@@ -10,6 +10,9 @@ services:
     - data:/data
     restart: always
     command: --admin-password "{{ portainer_admin_password | password_hash('bcrypt') | replace('$','$$')}}"
-
+    cpus: 1.0
+    mem_limit: 512m
+    memswap_limit: 0
+    
 volumes:
   data:

@@ -11,8 +11,6 @@ virtualbox_host: 0.0.0.0
 virtualbox_port: 18083
 
 autostart_virtual_machines:
-  - dev
-  - glrunner1
   - office
   - ttrss
   - kube1
@@ -20,9 +18,6 @@ autostart_virtual_machines:
 
 backup_vms:
   # A VM backup is executed in a single thread. We can start them all at the same time.
-  - vm_name: dev
-    cron_hour: 0
-    cron_min: 0
   - vm_name: kube1
     cron_hour: 0
     cron_min: 0

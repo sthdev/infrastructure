@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "Sending ACPI power button event to VM {{item.vm_name}}..."
+vboxmanage controlvm {{item.vm_name}} acpipowerbutton
+
+until vboxmanage showvminfo {{item.vm_name}} --machinereadable | grep VMState=\"poweroff\"
+do
+        echo "Waiting for VM {{item.vm_name}} to shutdown..."
+        sleep 1s
+done
+
+echo "VM {{item.vm_name}} has shut down"
+
+echo "Exporting VM..."
+rm -v /tmp/{{item.vm_name}}.ova
+vboxmanage export {{item.vm_name}} -o /tmp/{{item.vm_name}}.ova
+
+echo "Restarting VM..."
+vboxmanage startvm {{item.vm_name}} --type headless
+
+echo "Copying exported VM to {{virtualbox_vm_backup_mount_point}}//vm-backups/{{item.vm_name}}.ova..."
+mv -vf /tmp/{{item.vm_name}}.ova {{virtualbox_vm_backup_mount_point}}//vm-backups/{{item.vm_name}}.ova
+
+echo "Backup of VM {{item.vm_name}} successful."

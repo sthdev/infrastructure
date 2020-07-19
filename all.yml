@@ -15,3 +15,9 @@
     - name: Set timezone to Berlin
       timezone:
         name: Europe/Berlin
+
+    - name: Avoid memory swapping
+      sysctl:
+        name: vm.swappiness
+        value: "0"
+

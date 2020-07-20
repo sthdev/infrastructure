@@ -11,9 +11,6 @@ all:
     kube1.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
-    kube2.fritz.box:
-      ansible_user: administrator
-      ansible_python_interpreter: /usr/bin/python3
   children:
     physical:
       hosts:
@@ -30,7 +27,6 @@ all:
             kube1.fritz.box:
         k8s_worker:
           hosts:
-            kube2.fritz.box:
     ssmtp:
       hosts:
         srv1.fritz.box:

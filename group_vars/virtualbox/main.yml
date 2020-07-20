@@ -13,14 +13,10 @@ virtualbox_port: 18083
 autostart_virtual_machines:
   - office
   - kube1
-  - kube2
 
 backup_vms:
   # A VM backup is executed in a single thread. We can start them all at the same time.
   - vm_name: kube1
-    cron_hour: 0
-    cron_min: 0
-  - vm_name: kube2
     cron_hour: 0
     cron_min: 0
   - vm_name: office

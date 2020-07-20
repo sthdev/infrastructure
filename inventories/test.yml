@@ -4,9 +4,6 @@ all:
     kube-test1.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
-    kube-test2.fritz.box:
-      ansible_user: administrator
-      ansible_python_interpreter: /usr/bin/python3
   children:
     k8s:
       children:
@@ -15,4 +12,3 @@ all:
             kube-test1.fritz.box:
         k8s_worker:
           hosts:
-            kube-test2.fritz.box:

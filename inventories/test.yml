@@ -1,14 +1,21 @@
 ---
 all:
   hosts:
-    kube-test1.fritz.box:
+    srv1-test.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
   children:
-    k8s:
+    physical:
+      hosts:
+        srv1-test.fritz.box:
+    docker:
       children:
-        k8s_controller:
+        portainer:
           hosts:
-            kube-test1.fritz.box:
-        k8s_worker:
-          hosts:
+            srv1-test.fritz.box:
+    ssmtp:
+      hosts:
+        srv1-test.fritz.box:
+    virtualbox:
+      hosts:
+        srv1-test.fritz.box:

@@ -17,13 +17,6 @@ all:
         portainer:
           hosts:
             srv1.fritz.box:
-    k8s:
-      children:
-        k8s_controller:
-          hosts:
-            srv1.fritz.box:
-        k8s_worker:
-          hosts:
     ssmtp:
       hosts:
         srv1.fritz.box:

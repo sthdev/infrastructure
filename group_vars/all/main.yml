@@ -1,3 +1,5 @@
 ports:
   phpvirtualbox: 8080
   portainer: 8081
+
+rsyslog_server: ds.fritz.box:514

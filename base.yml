@@ -21,3 +21,17 @@
         name: vm.swappiness
         value: "0"
 
+    - name: Send syslogs to {{rsyslog_server}}
+      lineinfile:
+        path: /etc/rsyslog.conf
+        state: present
+        regexp: '^\*\.\*'
+        line: '*.* @{{rsyslog_server}}'
+      notify:
+        - restart rsyslog
+
+  handlers:
+    - name: restart rsyslog
+      service:
+        name: rsyslog
+        state: restarted

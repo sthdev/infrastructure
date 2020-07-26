@@ -97,14 +97,6 @@
         dest: "/etc/systemd/system/vm_{{item}}.service"
       loop: "{{autostart_virtual_machines}}"
 
-    - name: Enable and start services
-      service:
-        name: vm_{{item}}
-        enabled: yes
-        state: started
-        daemon_reload: yes
-      loop: "{{autostart_virtual_machines}}"
-
 # Set up VM backups
     - name: Create vm-backups subdir in backup mount point
       file:

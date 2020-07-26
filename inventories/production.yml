@@ -8,6 +8,9 @@ all:
     office.fritz.box:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
+    kube1.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
   children:
     physical:
       hosts:
@@ -17,6 +20,13 @@ all:
         portainer:
           hosts:
             srv1.fritz.box:
+    k8s:
+      children:
+        k8s_controller:
+          hosts:
+            kube1.fritz.box:
+        k8s_worker:
+          hosts:
     ssmtp:
       hosts:
         srv1.fritz.box:

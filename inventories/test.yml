@@ -4,6 +4,12 @@ all:
     srv1-test.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
+    kube1-test.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
+    kube2-test.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
   children:
     physical:
       hosts:
@@ -13,6 +19,14 @@ all:
         portainer:
           hosts:
             srv1-test.fritz.box:
+    k8s:
+      children:
+        k8s_controller:
+          hosts:
+            kube1-test.fritz.box:
+        k8s_worker:
+          hosts:
+            kube2-test.fritz.box:
     ssmtp:
       hosts:
         srv1-test.fritz.box:

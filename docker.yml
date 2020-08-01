@@ -1,0 +1,56 @@
+---
+- name: Setup Docker Hosts
+  hosts: docker
+  become: true
+
+  roles:
+    - role: geerlingguy.docker
+      docker_compose_version: "1.25.5"
+      docker_compose_path: /usr/bin/docker-compose
+
+    - role: geerlingguy.pip
+      pip_install_packages:
+        - docker
+        - docker-compose
+      pip_package: python3-pip
+      pip_executable: pip3
+
+  tasks:
+    - name: Increate vm.max_map_count
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+
+    - name: Create directory for Docker daemon config
+      file:
+        path: /etc/systemd/system/docker.service.d/
+        state: directory
+        mode: '0755'
+
+    - name: Expose Docker daemon via TCP port 2375
+      copy:
+        dest: /etc/systemd/system/docker.service.d/docker.conf
+        content: |
+          [Service]
+          ExecStart=
+          ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+      notify: restart docker
+
+    - name: Enable log rotation
+      copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "10m",
+              "max-file": "1"
+            }
+          } 
+      notify: restart docker
+
+  handlers:
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted

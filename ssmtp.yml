@@ -1,0 +1,30 @@
+---
+- name: Set up sSMTP
+  hosts: ssmtp
+  become: true
+
+  tasks:
+    - name: Install sSMTP
+      package:
+        name: ssmtp
+
+    - name: Create ssmtp.conf
+      template:
+        src: ssmtp/ssmtp.conf.j2
+        dest: "/etc/ssmtp/ssmtp.conf"
+        mode: '0640'
+        owner: root
+        group: mail
+
+    - name: add mail users to 'mail' group
+      user:
+        name: "{{item}}"
+        group: mail
+        append: true
+      loop: "{{smtp.mail_users}}"
+
+    - name: Add MAILTO entry to crontab
+      cron:
+        name: MAILTO
+        env: yes
+        job: "{{smtp.sender}}"

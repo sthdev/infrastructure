@@ -1,1 +1,0 @@
-Sets up metricbeat to send metric data to elastic search.

@@ -1,5 +1,0 @@
----
-nexus_config_dir: /etc/docker-services/nexus
-portainer_host: portainer
-nexus_port: 8081
-nexus_version: latest

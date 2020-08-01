@@ -1,41 +1,35 @@
 ---
 all:
   hosts:
-    test.fritz.box:
-      ansible_user: master
-      # There is no python command on this host. Explicitly specify the python interpreter to use.
+    srv1-test.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
+    kube1-test.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
+    kube2-test.fritz.box:
+      ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
   children:
-    virtual_hosts:
+    physical:
       hosts:
-        test.fritz.box:
-    portainer:
+        srv1-test.fritz.box:
+    docker:
+      children:
+        portainer:
+          hosts:
+            srv1-test.fritz.box:
+    k8s:
+      children:
+        k8s_controller:
+          hosts:
+            kube1-test.fritz.box:
+        k8s_worker:
+          hosts:
+            kube2-test.fritz.box:
+    ssmtp:
       hosts:
-        test.fritz.box:
-    drawio:
-      hosts:
-        test.fritz.box:
-    elastic:
-      hosts:
-        test.fritz.box:
-    gitlab:
-      hosts:
-        test.fritz.box:
-    metricbeat:
-      hosts:
-        test.fritz.box:
-    nexus:
-      hots:
-        test.fritz.box:
-    onlyoffice:
-      hosts:
-        test.fritz.box:
-    sonarqube:
-      hosts:
-        test.fritz.box:
-    ttrss:
-      hosts:
-        test.fritz.box:
+        srv1-test.fritz.box:
     virtualbox:
       hosts:
-        test.fritz.box:
+        srv1-test.fritz.box:

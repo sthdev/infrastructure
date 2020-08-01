@@ -1,8 +1,0 @@
----
-virtualbox_host: vbox.server:18083 # hostname and port of the VirtualBox server
-virtualbox_servername: VirtualBox Server # human-readable name of VirtualBox server
-virtualbox_user: virtualbox # username needed to authenticate with virtualbox server
-virtualbox_user_password: changeme # password for username
-
-php_virtualbox_port: 80 # port where phpVirtualBox will listen
-php_virtualbox_config_dir: /etc/phpvirtualbox

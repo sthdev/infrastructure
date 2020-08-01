@@ -1,0 +1,6 @@
+ports:
+  phpvirtualbox: 8080
+  portainer: 8081
+  ttrss: 8082
+
+rsyslog_server: ds.fritz.box:514

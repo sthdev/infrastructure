@@ -5,53 +5,38 @@ all:
       ansible_user: master
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
-    dev.fritz.box:
-      ansible_user: master
-      ansible_python_interpreter: /usr/bin/python3
-    glrunner1.fritz.box:
-      ansible_user: master
+    kube1.fritz.box:
+      ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
     office.fritz.box:
       ansible_user: master
       ansible_python_interpreter: /usr/bin/python3
     ttrss.fritz.box:
-      ansible_user: master
+      ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
   children:
-    physical_hosts:
+    physical:
       hosts:
         srv1.fritz.box:
-    docker_hosts:
+    docker:
+      children:
+        portainer:
+          hosts:
+            srv1.fritz.box:
+        ttrss:
+          hosts:
+            ttrss.fritz.box:
+    k8s:
+      children:
+        k8s_controller:
+          hosts:
+            kube1.fritz.box:
+        k8s_worker:
+          hosts:
+    ssmtp:
       hosts:
-        dev.fritz.box:
-        glrunner1.fritz.box:
+        srv1.fritz.box:
         office.fritz.box:
-        ttrss.fritz.box:
-    portainer:
-      hosts:
-        srv1.fritz.box:
-    elastic:
-      hosts:
-        dev.fritz.box:
-    gitlab:
-      hosts:
-        dev.fritz.box:
-    gitlab_runner:
-      hosts:
-        glrunner1.fritz.box:      
-    metricbeat:
-      hosts:
-        srv1.fritz.box:
-        dev.fritz.box:
-        glrunner1.fritz.box:
-        office.fritz.box:
-        ttrss.fritz.box:
-    sonarqube:
-      hosts:
-        dev.fritz.box:
-    ttrss:
-      hosts:
-        ttrss.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

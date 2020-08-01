@@ -1,0 +1,15 @@
+---
+k8s_addons:
+  - dns
+  - dashboard
+  - helm3
+
+bash_aliases:
+  - "alias kubectl='microk8s.kubectl'"
+  - "alias helm='microk8s.helm3'"
+
+bash_completions:
+  - command: kubectl
+    script_generation_command: /snap/bin/microk8s.kubectl completion bash
+  - command: helm
+    script_generation_command: /snap/bin/microk8s.helm3 completion bash

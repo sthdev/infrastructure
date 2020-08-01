@@ -1,0 +1,52 @@
+---
+- name: Set up microk8s
+  hosts: k8s
+  become: true
+
+  tasks:
+  - name: Install nfs
+    package:
+      name: nfs-common
+
+  - name: Install microk8s
+    snap:
+      name: microk8s
+      classic: true  
+
+  - name: Add user {{k8s_admin_user}} to group 'microk8s'
+    user:
+      name: "{{k8s_admin_user}}"
+      group: microk8s
+      append: true
+
+
+- name: Set up microk8s controller
+  hosts: k8s_controller
+  become: true
+
+  tasks:
+  - name: Install K8s add-ons
+    command: "microk8s.enable {{k8s_addons | join(' ')}}"
+
+  - name: Add command shortcuts to bash_aliases of {{k8s_admin_user}}
+    become: "{{k8s_admin_user}}"
+    lineinfile:
+      path: ~/.bash_aliases
+      regexp: "^{{item}}$"
+      line: "{{item}}"
+      create: true
+    with_items: "{{bash_aliases}}"
+
+  - name: Set up bash completions
+    include: templates/k8s/bash_completions.yml
+    with_items: "{{bash_completions}}"
+    
+
+- name: Set up microk8s workers
+  hosts: k8s_worker
+  become: true
+
+  tasks:
+    - name: Print info
+      debug:
+        msg: "Call microk8s.add-node on the controller and follow directions to add this node the cluser."

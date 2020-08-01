@@ -1,1 +1,0 @@
-Sets up phpVirtualBox in a docker container.

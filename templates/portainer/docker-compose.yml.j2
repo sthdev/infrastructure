@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  portainer:
+    image: portainer/portainer:{{portainer_version}}
+    ports:
+    - {{ ports.portainer }}:9000
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - data:/data
+    restart: always
+    command: --admin-password "{{ portainer_admin_password | password_hash('bcrypt') | replace('$','$$')}}"
+    cpus: 1.0
+    mem_limit: 512m
+    memswap_limit: 0
+    
+volumes:
+  data:

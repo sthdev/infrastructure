@@ -5,6 +5,9 @@ all:
       ansible_user: master
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
+    k3s1.fritz.box:
+      ansible_user: administrator
+      ansible_python_interpreter: /usr/bin/python3
     kube1.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
@@ -33,6 +36,13 @@ all:
             kube1.fritz.box:
         microk8s_worker:
           hosts:
+    k3s:
+      children:
+        k3s_controller:
+          hosts:
+            k3s1.fritz.box:
+        k3s_worker:
+          hosts:          
     ssmtp:
       hosts:
         srv1.fritz.box:

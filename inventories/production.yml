@@ -26,12 +26,12 @@ all:
         ttrss:
           hosts:
             ttrss.fritz.box:
-    k8s:
+    microk8s:
       children:
-        k8s_controller:
+        microk8s_controller:
           hosts:
             kube1.fritz.box:
-        k8s_worker:
+        microk8s_worker:
           hosts:
     ssmtp:
       hosts:

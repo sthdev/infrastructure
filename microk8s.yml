@@ -1,6 +1,6 @@
 ---
 - name: Set up microk8s
-  hosts: k8s
+  hosts: microk8s
   become: true
 
   tasks:
@@ -21,7 +21,7 @@
 
 
 - name: Set up microk8s controller
-  hosts: k8s_controller
+  hosts: microk8s_controller
   become: true
 
   tasks:
@@ -43,7 +43,7 @@
     
 
 - name: Set up microk8s workers
-  hosts: k8s_worker
+  hosts: microk8s_worker
   become: true
 
   tasks:

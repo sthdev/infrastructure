@@ -5,7 +5,7 @@
 
   roles:
     - role: geerlingguy.docker
-      docker_compose_version: "1.25.5"
+      docker_compose_version: "1.27.1"
       docker_compose_path: /usr/bin/docker-compose
 
     - role: geerlingguy.pip

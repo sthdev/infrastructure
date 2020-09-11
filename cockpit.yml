@@ -1,0 +1,10 @@
+---
+- name: Setup Cockppit
+  hosts: cockpit
+  become: true
+
+  tasks:
+    - name: Install Cockpit
+      package:
+        name:
+        - cockpit

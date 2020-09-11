@@ -9,6 +9,9 @@ all:
     physical:
       hosts:
         srv1.fritz.box:
+    cockpit:
+      hosts:
+        srv1.fritz.box:
     docker:
       hosts:
         srv1.fritz.box:

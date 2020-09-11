@@ -12,3 +12,6 @@ all:
     docker:
       hosts:
         srv1.fritz.box:
+    ssmtp:
+      hosts:
+        srv1.fritz.box:

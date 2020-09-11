@@ -1,3 +1,0 @@
----
-portainer_config_dir: /etc/docker-services/portainer
-portainer_version: 1.24.1

@@ -8,3 +8,17 @@
       package:
         name:
         - cockpit
+
+    - name: Create cockpit.conf
+      copy:
+        dest: /etc/cockpit/cockpit.conf
+        content: |
+          [WebService]
+          AllowUnencrypted = true
+      notify: restart cockpit
+
+  handlers:
+    - name: restart cockpit
+      systemd:
+        name: cockpit.socket
+        state: restarted

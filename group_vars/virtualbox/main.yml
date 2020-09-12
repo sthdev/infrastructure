@@ -16,5 +16,5 @@ backup_vms: []
 
 php_virtualbox_config_dir: /etc/phpvirtualbox
 
-virtualbox_vm_backup_mount_point: /mnt/backup
+virtualbox_vm_backup_mount_point: /mnt/storage/
 virtualbox_vm_backup_script_dir: /etc/virtualbox/backup-scripts

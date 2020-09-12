@@ -1,0 +1,23 @@
+---
+- name: Setup NFS storage
+  hosts: nfs
+  become: true
+
+  tasks:
+    - name: Install nfs
+      package: 
+        name: nfs-common
+
+    - name: Create mount point for NFS share
+      file:
+        path: '{{nfs_mount_dir}}'
+        state: directory
+        mode: '1777'
+
+
+    - name: Mount NFS storage share for this machine
+      mount:
+        path: '{{nfs_mount_dir}}'
+        src: '{{ nfs_base_share }}'
+        state: mounted
+        fstype: nfs

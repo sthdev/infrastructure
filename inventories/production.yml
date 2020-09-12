@@ -6,9 +6,14 @@ all:
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
   children:
-    physical:
-      hosts:
-        srv1.fritz.box:
+    nfs:
+      children:
+        physical:
+          hosts:
+            srv1.fritz.box:
+        virtualbox:
+          hosts:
+            srv1.fritz.box:
     cockpit:
       hosts:
         srv1.fritz.box:
@@ -16,8 +21,5 @@ all:
       hosts:
         srv1.fritz.box:
     ssmtp:
-      hosts:
-        srv1.fritz.box:
-    virtualbox:
       hosts:
         srv1.fritz.box:

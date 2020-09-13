@@ -1,5 +1,5 @@
 ---
-- name: Setup Cockppit
+- name: Setup Cockpit
   hosts: cockpit
   become: true
 

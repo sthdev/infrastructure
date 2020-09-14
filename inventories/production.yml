@@ -15,6 +15,7 @@ all:
     cockpit:
       hosts:
         srv1.fritz.box:
+        microk8s1.fritz.box:
     docker:
       hosts:
         srv1.fritz.box:

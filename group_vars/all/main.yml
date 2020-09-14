@@ -4,3 +4,7 @@ ports:
   ttrss: 8082
 
 rsyslog_server: ds.fritz.box:514
+
+nfs:
+  base_share: 'ds.fritz.box:/volume1/storage'
+  mount_dir: /mnt/storage

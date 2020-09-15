@@ -16,6 +16,9 @@
         content: |
           [WebService]
           AllowUnencrypted = true
+
+          [Session]
+          IdleTimeout = 0
       notify: restart cockpit
 
   handlers:

@@ -5,9 +5,6 @@ all:
       ansible_user: administrator
       # There is no python command on this host. Explicitly specify the python interpreter to use.
       ansible_python_interpreter: /usr/bin/python3
-    gitlab.fritz.box:
-      ansible_user: administrator
-      ansible_python_interpreter: /usr/bin/python3
     microk8s1.fritz.box:
       ansible_user: administrator
       ansible_python_interpreter: /usr/bin/python3
@@ -18,7 +15,6 @@ all:
     cockpit:
       hosts:
         srv1.fritz.box:
-        gitlab.fritz.box:
         microk8s1.fritz.box:
     docker:
       hosts:
@@ -33,7 +29,6 @@ all:
     ssmtp:
       hosts:
         srv1.fritz.box:
-        gitlab.fritz.box:
     virtualbox:
       hosts:
         srv1.fritz.box:

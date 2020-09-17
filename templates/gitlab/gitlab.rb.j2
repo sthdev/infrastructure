@@ -4,6 +4,32 @@ external_url '{{gitlab_external_url}}'
 nginx['listen_port'] = 80
 nginx['listen_https'] = false
 
+### LDAP Settings
+###! Docs: https://docs.gitlab.com/omnibus/settings/ldap.html
+###! **Be careful not to break the indentation in the ldap_servers block. It is
+###!   in yaml format and the spaces must be retained. Using tabs will not work.**
+
+gitlab_rails['ldap_enabled'] = true
+gitlab_rails['prevent_ldap_sign_in'] = false
+
+###! **remember to close this block with 'EOS' below**
+gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+  main: # 'main' is the GitLab 'provider ID' of this LDAP server
+    label: 'LDAP'
+    host: '{{ldap.host}}'
+    port: {{ldap.port}}
+    encryption: 'simple_tls'
+    uid: 'sAMAccountName'
+    bind_dn: '{{ldap.bind_dn}}'
+    password: '{{ldap.bind_dn_password}}'
+    timeout: 10
+    active_directory: true
+    allow_username_or_email_login: false
+    block_auto_created_users: false
+    base: '{{ldap.base_dn}}'
+    verify_certificates: false
+EOS
+
 gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_address'] = "{{smtp.server}}"
 gitlab_rails['smtp_port'] = {{smtp.port}}

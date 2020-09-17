@@ -8,11 +8,3 @@ all:
     cockpit:
       hosts:
         srv1-test.fritz.box:
-    docker:
-      children:
-        gitlab:
-          hosts:
-            srv1-test.fritz.box:
-    ssmtp:
-      hosts:
-        srv1-test.fritz.box:

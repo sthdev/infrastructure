@@ -1,0 +1,8 @@
+---
+gitlab_config_dir: /etc/gitlab
+gitlab_version: latest
+gitlab_http_port: 2080
+gitlab_https_port: 2443
+gitlab_ssh_port: 2022
+gitlab_data_dir: "{{nfs.mount_dir}}/gitlab/data"
+gitlab_logs_dir: "{{nfs.mount_dir}}/gitlab/logs"

@@ -9,8 +9,10 @@ all:
       hosts:
         srv1-test.fritz.box:
     docker:
-      hosts:
-        srv1-test.fritz.box:
+      children:
+        gitlab:
+          hosts:
+            srv1-test.fritz.box:
     ssmtp:
       hosts:
         srv1-test.fritz.box:

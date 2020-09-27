@@ -1,0 +1,3 @@
+---
+gitlab_runner_version: v13.4.1
+gitlab_runner_config_dir: /etc/gitlab-runner

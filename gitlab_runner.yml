@@ -4,20 +4,18 @@
   become: true
 
   tasks:
-    - name: Add Gitlab repo keys
-      apt_key:
-        url: "https://packages.gitlab.com/runner/gitlab-runner/gpgkey"
-        state: present
-        
-    - name: Add Gitlab repo
-      apt_repository:
-        repo: 'deb https://packages.gitlab.com/runner/gitlab-runner/ubuntu/ {{ ansible_distribution_release }} main'
-        state: present
-        update_cache: yes
+    - name: Create gitlab-runner config dir
+      file:
+        path: "{{gitlab_runner_config_dir}}"
+        state: directory
+        mode: '0600'
 
-    - name: Install Gitlab Runner
-      apt:
-        name: gitlab-runner
-        state: present
-      environment:
-        GITLAB_RUNNER_DISABLE_SKEL: true
+    - name: Create gitlab-runner compose file
+      template:
+        src: gitlab_runner/docker-compose.yml.j2
+        dest: "{{gitlab_runner_config_dir}}/docker-compose.yml"
+        mode: '0600'
+
+    - name: Start gitlab-runner docker container
+      docker_compose:
+        project_src: "{{gitlab_runner_config_dir}}"

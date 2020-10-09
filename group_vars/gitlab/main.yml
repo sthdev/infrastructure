@@ -1,6 +1,6 @@
 ---
 gitlab_config_dir: /etc/gitlab
-gitlab_version: 13.4.1-ce.0
+gitlab_version: 13.4.3-ce.0
 gitlab_http_port: 2080
 gitlab_https_port: 2443
 gitlab_ssh_port: 2022

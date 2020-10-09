@@ -5,6 +5,10 @@ registry_external_url '{{docker_registry_external_url}}'
 nginx['listen_port'] = 80
 nginx['listen_https'] = false
 
+registry_nginx['enable'] = true
+registry_nginx['listen_port'] = 80
+registry_nginx['listen_https'] = false
+
 ### LDAP Settings
 ###! Docs: https://docs.gitlab.com/omnibus/settings/ldap.html
 ###! **Be careful not to break the indentation in the ldap_servers block. It is
